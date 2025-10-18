@@ -1,0 +1,53 @@
+  :root {
+            --primary-color: #3b82f6; /* Tailwind blue-500 */
+            --dark-bg: #0c121e; /* Deeper background for more contrast */
+            --light-text: #f1f5f9; /* Tailwind slate-100 */
+            --card-bg: #1a2434; /* Slightly lighter card background */
+        }
+        
+        /* Base Styles */
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--dark-bg);
+            color: var(--light-text);
+            scroll-behavior: smooth; /* Ensures smooth scrolling between sections */
+        }
+        
+        /* Section Title Styling */
+        .section-title {
+            position: relative;
+            display: inline-block;
+            padding-bottom: 0.5rem;
+            margin-bottom: 1.5rem;
+            font-weight: 700;
+            color: var(--primary-color);
+        }
+        .section-title::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 50%;
+            height: 3px;
+            background-color: var(--primary-color);
+            border-radius: 9999px;
+        }
+        
+        /* Navigation Link Hover Effect */
+        .nav-link:hover {
+            color: var(--primary-color);
+            transform: translateY(-2px);
+        }
+        
+        /* Card Fluidity and Hover Effect */
+        .card {
+            /* Smoother transition curve for a fluid feel */
+            transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+            background-color: var(--card-bg);
+        }
+        .card:hover {
+            /* Deeper, slightly glowing blue shadow on hover */
+            box-shadow: 0 15px 30px -5px rgba(59, 130, 246, 0.35), 0 6px 12px -3px rgba(59, 130, 246, 0.15);
+            transform: translateY(-5px); /* Creates a smooth "lift" effect */
+            border-color: rgba(59, 130, 246, 0.5); /* Primary color border highlight */
+        }
