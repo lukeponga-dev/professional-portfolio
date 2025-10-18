@@ -1,4 +1,5 @@
-// Smooth scroll with offset for sticky header
+
+        // Smooth scroll with offset for sticky header
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
                 e.preventDefault();
@@ -175,4 +176,3 @@
             canvas.width = hero.offsetWidth;
             canvas.height = hero.offsetHeight;
         });
-    
