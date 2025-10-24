@@ -41,16 +41,18 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         
         const targetId = this.getAttribute('href');
         const targetElement = document.querySelector(targetId);
-        
-        // Compensate for the sticky navigation bar height
-        const headerOffset = 80; 
-        const elementPosition = targetElement.offsetTop;
-        const offsetPosition = elementPosition - headerOffset;
 
-        window.scrollTo({
-            top: offsetPosition,
-            behavior: "smooth"
-        });
+        if (targetElement) {
+            // Compensate for the sticky navigation bar height
+            const headerOffset = 80; 
+            const elementPosition = targetElement.offsetTop;
+            const offsetPosition = elementPosition - headerOffset;
+
+            window.scrollTo({
+                top: offsetPosition,
+                behavior: "smooth"
+            });
+        }
         
         // Close mobile menu if it's open
         const mobileMenu = document.getElementById('mobileMenu');
@@ -78,9 +80,11 @@ if (canvas) {
     const ctx = canvas.getContext('2d');
     const particles = [];
     const particleCount = 75;
+    const connectDistance = 120; // Max distance for drawing lines
 
     // Function to ensure canvas size matches its container (responsive)
     function resizeCanvas() {
+        // Use offsetWidth/Height to get the actual rendered size
         canvas.width = canvas.offsetWidth;
         canvas.height = canvas.offsetHeight;
     }
@@ -114,9 +118,37 @@ if (canvas) {
         draw() {
             ctx.beginPath();
             ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2); 
-            // Semi-transparent blue for a subtle glow effect
-            ctx.fillStyle = 'rgba(59, 130, 246, 0.5)'; 
+            // Read particle color dynamically from CSS
+            const particleColor = getComputedStyle(body).getPropertyValue('--particle-color').trim();
+            ctx.fillStyle = particleColor || 'rgba(59, 130, 246, 0.5)';
             ctx.fill();
+        }
+    }
+
+    // Function to connect particles with lines
+    function connectParticles() {
+        const particleColor = getComputedStyle(body).getPropertyValue('--particle-color').trim();
+
+        for (let i = 0; i < particleCount; i++) {
+            for (let j = i + 1; j < particleCount; j++) {
+                const p1 = particles[i];
+                const p2 = particles[j];
+
+                // Calculate distance using Pythagorean theorem (faster than Math.sqrt for comparison)
+                const distanceSq = (p1.x - p2.x) ** 2 + (p1.y - p2.y) ** 2;
+
+                if (distanceSq < connectDistance ** 2) {
+                    const opacity = 1 - (distanceSq / (connectDistance ** 2));
+                    
+                    ctx.beginPath();
+                    // Set line color dynamically, fading out based on distance
+                    ctx.strokeStyle = particleColor.replace(/,\s*([\d.]+)\)/, `, ${opacity * 0.4})`);
+                    ctx.lineWidth = 0.5; // Subtle line thickness
+                    ctx.moveTo(p1.x, p1.y);
+                    ctx.lineTo(p2.x, p2.y);
+                    ctx.stroke();
+                }
+            }
         }
     }
 
@@ -127,21 +159,21 @@ if (canvas) {
 
     // Main animation loop
     function animate() {
-        // Only draw/animate if the current body is in dark mode for better contrast
+        ctx.clearRect(0, 0, canvas.width, canvas.height); // Always clear the canvas first
+
+        // Only draw particles/lines when in dark mode (where the effect is intended)
         if (!body.classList.contains('light-mode')) {
-            ctx.clearRect(0, 0, canvas.width, canvas.height); // Clears the canvas
+            connectParticles();
             particles.forEach(particle => {
                 particle.update(); 
                 particle.draw(); 
             });
-        } else {
-            // Ensures the canvas is cleared in light mode
-            ctx.clearRect(0, 0, canvas.width, canvas.height); 
         }
+        
         requestAnimationFrame(animate); // Requests the next frame for continuous animation
     }
 
-    // Start the animation loop when the window is loaded to ensure canvas is ready
+    // Start the animation loop after the DOM is fully loaded and canvas is ready
     window.onload = function () {
         animate();
     }

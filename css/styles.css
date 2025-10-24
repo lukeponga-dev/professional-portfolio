@@ -16,6 +16,8 @@ body {
     --text-color: #f1f5f9;
     --secondary-text: #94a3b8; /* slate-400 */
     --border-color: rgba(241, 245, 249, 0.1);
+    /* New variable for the subtle particle lines color */
+    --particle-color: rgba(59, 130, 246, 0.4); 
 }
 
 /* Overwrite CSS Variables for Light Mode */
@@ -26,6 +28,8 @@ body.light-mode {
     --text-color: #0f172a; /* Tailwind slate-900 */
     --secondary-text: #475569; /* slate-600 */
     --border-color: rgba(15, 23, 42, 0.1); /* Darker border */
+    /* Update particle color to be less visible in light mode */
+    --particle-color: rgba(30, 64, 175, 0.2); 
 }
 
 /* Section Title Styling: Adds a primary color underline effect */
@@ -52,6 +56,8 @@ body.light-mode {
     background-color: var(--card-bg);
     border: 1px solid var(--border-color);
     color: var(--text-color);
+    /* Optimization: Hint for browser regarding upcoming changes */
+    will-change: transform, box-shadow; 
 }
 .card:hover {
     box-shadow: 0 10px 20px -5px rgba(59, 130, 246, 0.3);
