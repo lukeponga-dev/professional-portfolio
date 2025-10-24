@@ -31,16 +31,13 @@ body.light-mode {
 .section-title {
     position: relative;
     display: inline-block;
-    padding-bottom: 0.5rem;
-    margin-bottom: 1.5rem;
-    font-weight: 700;
-    color: var(--primary-color);
 }
 .section-title::after {
     content: '';
     position: absolute;
-    left: 0;
-    bottom: 0;
+    bottom: -8px;
+    left: 50%;
+    transform: translateX(-50%);
     width: 50%;
     height: 3px;
     background-color: var(--primary-color);
@@ -83,27 +80,12 @@ body.light-mode {
     color: var(--primary-color);
 }
 
-/* Hero Section canvas setup */
-#hero {
-    position: relative;
-    overflow: hidden; /* Hide particles outside bounds */
-}
-#hero canvas {
+/* Canvas for Hero Background Animation */
+#hero-canvas {
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    pointer-events: none;
-    opacity: 0.3;
-}
-
-/* Ensure all direct children of hero are positioned correctly */
-#hero > * {
-    position: relative;
-    z-index: 10;
-}
-/* Custom list style to remove the default list-inside margin from Tailwind */
-.list-inside li {
-    padding-left: 0.5rem;
+    z-index: -1; /* Ensures canvas stays behind content */
 }

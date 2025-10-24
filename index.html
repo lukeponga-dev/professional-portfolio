@@ -4,13 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Luke Ponga - Developer and IT Support Specialist</title>
-    <!-- Load Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="css/styles.css">
+
+    <link rel="stylesheet" href="/css/styles.css">
 </head>
 <body>
-    <!-- Navigation Bar -->
+    <!-- Header and navbar-->
     <header class="sticky top-0 z-50 bg-slate-900/90 backdrop-blur-md shadow-lg border-b border-slate-700 light-mode:bg-white/90 light-mode:border-slate-200 transition duration-500">
         <nav class="max-w-7xl mx-auto container-padding py-4 flex justify-between items-center">
             <a href="#hero" class="text-2xl font-extrabold text-white light-mode:text-slate-900 tracking-wider transition duration-500">Luke Ponga</a>
@@ -18,205 +18,295 @@
                 <a href="#about" class="nav-link">About</a>
                 <a href="#skills" class="nav-link">Skills</a>
                 <a href="#projects" class="nav-link">Projects</a>
-                <a href="#experience" class="nav-link">Experience</a>
-                <a href="#education" class="nav-link">Education</a>
                 <a href="#contact" class="nav-link">Contact</a>
             </div>
-            <button id="themeToggle" class="p-2 rounded-full hover:bg-slate-700 light-mode:hover:bg-slate-200 transition duration-300">
-                <svg id="moonIcon" class="w-6 h-6 text-blue-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
-                </svg>
-                <svg id="sunIcon" class="w-6 h-6 text-yellow-500 hidden" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364-.707-.707M6.343 6.343l-.707-.707m12.728 0 .707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
-                </svg>
-            </button>
+            
+            <div class="flex items-center space-x-4">
+                <button id="themeToggle" class="p-2 rounded-full hover:bg-slate-700 light-mode:hover:bg-slate-200 transition duration-300 focus:outline-none" aria-label="Toggle theme">
+                    <svg id="moonIcon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-6 h-6 text-white light-mode:text-slate-900">
+                        <path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/>
+                    </svg>
+                    <svg id="sunIcon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-6 h-6 text-white light-mode:text-slate-900 hidden">
+                        <circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.34 17.66-1.41 1.41"/><path d="m19.07 4.93-1.41 1.41"/>
+                    </svg>
+                </button>
+                <button id="mobileMenuButton" class="p-2 rounded-lg md:hidden focus:outline-none hover:bg-slate-700 light-mode:hover:bg-slate-200 transition duration-300" aria-label="Toggle mobile menu">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-6 h-6 text-white light-mode:text-slate-900">
+                        <line x1="3" x2="21" y1="12" y2="12"/><line x1="3" x2="21" y1="6" y2="6"/><line x1="3" x2="21" y1="18" y2="18"/>
+                    </svg>
+                </button>
+            </div>
         </nav>
+        
+        <div id="mobileMenu" class="md:hidden hidden transition-all duration-300 ease-in-out">
+            <div class="flex flex-col space-y-2 p-4 text-slate-300 light-mode:text-slate-600 bg-slate-900 light-mode:bg-white border-t border-slate-700 light-mode:border-slate-200">
+                <a href="#about" class="nav-link py-2 text-center border-b border-slate-800 light-mode:border-slate-200">About</a>
+                <a href="#skills" class="nav-link py-2 text-center border-b border-slate-800 light-mode:border-slate-200">Skills</a>
+                <a href="#projects" class="nav-link py-2 text-center border-b border-slate-800 light-mode:border-slate-200">Projects</a>
+                <a href="#contact" class="nav-link py-2 text-center">Contact</a>
+            </div>
+        </div>
     </header>
 
-    <main class="max-w-7xl mx-auto container-padding">
-        <!-- Hero Section -->
-        <section id="hero" class="py-24 md:py-40 flex flex-col items-center text-center">
-            <p class="text-xl text-blue-400 mb-3 font-medium">Software Developer & IT Support Specialist</p>
-            <h1 class="text-5xl sm:text-7xl lg:text-8xl font-extrabold leading-tight mb-6 text-white light-mode:text-slate-900 transition duration-500">
-                LUKE PONGA
-            </h1>
-            <h2 class="text-xl sm:text-2xl lg:text-3xl text-slate-300 light-mode:text-slate-600 font-light mb-10 max-w-4xl opacity-0">
-                A dedicated, quick-learning professional leveraging a Software Development foundation to deliver accelerated technical support.
-            </h2>
-            <a href="#contact" class="inline-flex items-center px-8 py-3 text-lg font-semibold text-white bg-blue-600 rounded-lg hover:bg-blue-700 transition duration-300 shadow-xl shadow-blue-500/40">
-                Let's Connect
-            </a>
+    <main>
+        <section id="hero" class="relative overflow-hidden pt-32 pb-24 md:pt-48 md:pb-36">
+            <canvas id="hero-canvas"></canvas>
+
+            <div class="max-w-7xl mx-auto container-padding relative z-10 text-center">
+                <h1 class="text-4xl md:text-6xl font-extrabold text-white light-mode:text-slate-900 leading-tight mb-4">
+                    Luke Ponga
+                </h1>
+                <p class="text-xl md:text-3xl font-medium text-blue-400 light-mode:text-blue-700 mb-8">
+                    IT Support Specialist & Software Developer
+                </p>
+                <p class="max-w-3xl mx-auto text-lg text-slate-300 light-mode:text-slate-700 mb-12">
+                    Bridging technical expertise with robust quality assurance. Dedicated to problem-solving, system stability, and continuous learning in modern development and support environments.
+                </p>
+                <div class="flex justify-center space-x-6">
+                    <a href="#contact" class="px-8 py-3 bg-blue-600 text-white font-semibold rounded-full shadow-lg hover:bg-blue-700 transition duration-300 transform hover:scale-105">
+                        Get In Touch
+                    </a>
+                    <a href="#projects" class="px-8 py-3 bg-transparent border-2 border-blue-600 text-blue-400 light-mode:text-blue-700 font-semibold rounded-full hover:bg-blue-600 hover:text-white transition duration-300 transform hover:scale-105">
+                        View Projects
+                    </a>
+                </div>
+            </div>
         </section>
 
-        <!-- About Me / Objective Section -->
-        <section id="about" class="py-16">
-            <h2 class="text-3xl section-title text-white">Objective & Core Strengths</h2>
-            <div class="card p-6 md:p-10 rounded-xl shadow-lg">
-                <p class="text-xl text-slate-300 light-mode:text-slate-700 leading-relaxed">
-                    I am actively seeking an IT Service Desk/Help Desk role where I can apply my formal training in Software Development (.NET, C#, SQL) to provide highly effective, structurally sound technical support. I excel at quickly grasping new concepts, troubleshooting issues with a root-cause perspective, and ensuring a positive user experience.
-                </p>
-                <div class="mt-6 pt-6 border-t border-slate-700/50 light-mode:border-slate-300">
-                    <p class="text-lg text-slate-400 light-mode:text-slate-500 italic">
-                        Known for a patient, authentic, and humble approach, I am a highly motivated individual focused on personal growth, strong communication, and reliable team collaboration.
+        <section id="about" class="py-16 md:py-24 bg-slate-950 light-mode:bg-white">
+            <div class="max-w-7xl mx-auto container-padding">
+                <h2 class="section-title text-3xl md:text-4xl font-bold text-center mb-16 text-white light-mode:text-slate-900">About Me</h2>
+                
+                <div class="grid md:grid-cols-2 gap-12 items-center">
+                    <div class="space-y-6 text-lg text-slate-300 light-mode:text-slate-700">
+                        <p>I am a certified IT professional with a solid background in software development and quality assurance. Having completed a **Level 6 Diploma in Software Development** and achieving the **ISTQB Certified Tester Foundation Level (CTFL)**, I bring a unique, quality-focused perspective to every challenge.</p>
+                        
+                        <p>My technical expertise spans **C#, .NET**, and **SQL** for robust back-end systems, complemented by modern web technologies like **Next.js, TypeScript**, and **Supabase**. I am highly adaptable and thrive on applying structured problem-solving techniques, whether I'm debugging code or resolving a critical user support issue.</p>
+                        
+                        <p>Currently seeking roles where I can contribute to smooth system operations, provide reliable IT support, and grow my skills in database management and full-stack development. I am a quick learner with a positive, patient attitude, always eager to contribute to a productive team environment.</p>
+                    </div>
+                    
+                    <div class="card p-6 rounded-xl shadow-2xl">
+                        <h3 class="text-2xl font-semibold mb-6 text-white light-mode:text-slate-900">Key Qualifications</h3>
+                        <ul class="space-y-4">
+                            <li class="flex items-start">
+                                <span class="text-blue-400 light-mode:text-blue-600 mr-3 text-2xl">✓</span>
+                                <div>
+                                    <p class="font-medium text-white light-mode:text-slate-900">ISTQB CTFL</p>
+                                    <p class="text-sm text-slate-400 light-mode:text-slate-600">Certified Tester Foundation Level - demonstrating proficiency in structured software testing and quality assurance.</p>
+                                </div>
+                            </li>
+                            <li class="flex items-start">
+                                <span class="text-blue-400 light-mode:text-blue-600 mr-3 text-2xl">✓</span>
+                                <div>
+                                    <p class="font-medium text-white light-mode:text-slate-900">Level 6 Diploma</p>
+                                    <p class="text-sm text-slate-400 light-mode:text-slate-600">Software Development (ATC Vision College) - solid foundation in computer science and programming principles.</p>
+                                </div>
+                            </li>
+                            <li class="flex items-start">
+                                <span class="text-blue-400 light-mode:text-blue-600 mr-3 text-2xl">✓</span>
+                                <div>
+                                    <p class="font-medium text-white light-mode:text-slate-900">Generative AI Certificate</p>
+                                    <p class="text-sm text-slate-400 light-mode:text-slate-600">Knowledge of integrating modern AI models (e.g., Google AI, Genkit) into applications.</p>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="skills" class="py-16 md:py-24 bg-slate-900 light-mode:bg-slate-50">
+            <div class="max-w-7xl mx-auto container-padding">
+                <h2 class="section-title text-3xl md:text-4xl font-bold text-center mb-16 text-white light-mode:text-slate-900">Technical Skills</h2>
+                
+                <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+                    <div class="card p-5 rounded-lg text-center shadow-md">
+                        <span class="text-4xl mb-2 inline-block">💻</span>
+                        <p class="font-bold text-lg text-white light-mode:text-slate-900">C# / .NET</p>
+                        <p class="text-sm text-slate-400 light-mode:text-slate-600">Enterprise Backend Development</p>
+                    </div>
+                    <div class="card p-5 rounded-lg text-center shadow-md">
+                        <span class="text-4xl mb-2 inline-block">🚀</span>
+                        <p class="font-bold text-lg text-white light-mode:text-slate-900">JavaScript/TypeScript</p>
+                        <p class="text-sm text-slate-400 light-mode:text-slate-600">Modern Web & App Logic</p>
+                    </div>
+                    <div class="card p-5 rounded-lg text-center shadow-md">
+                        <span class="text-4xl mb-2 inline-block">💾</span>
+                        <p class="font-bold text-lg text-white light-mode:text-slate-900">SQL</p>
+                        <p class="text-sm text-slate-400 light-mode:text-slate-600">Database Management & Querying</p>
+                    </div>
+                    <div class="card p-5 rounded-lg text-center shadow-md">
+                        <span class="text-4xl mb-2 inline-block">🌐</span>
+                        <p class="font-bold text-lg text-white light-mode:text-slate-900">React / Next.js</p>
+                        <p class="text-sm text-slate-400 light-mode:text-slate-600">Modern Frontend & Full-Stack</p>
+                    </div>
+                    <div class="card p-5 rounded-lg text-center shadow-md">
+                        <span class="text-4xl mb-2 inline-block">🛠️</span>
+                        <p class="font-bold text-lg text-white light-mode:text-slate-900">IT Support & HD</p>
+                        <p class="text-sm text-slate-400 light-mode:text-slate-600">Troubleshooting & System Maint.</p>
+                    </div>
+                    <div class="card p-5 rounded-lg text-center shadow-md">
+                        <span class="text-4xl mb-2 inline-block">✅</span>
+                        <p class="font-bold text-lg text-white light-mode:text-slate-900">Quality Assurance</p>
+                        <p class="text-sm text-slate-400 light-mode:text-slate-600">ISTQB Principles, Testing</p>
+                    </div>
+                    <div class="card p-5 rounded-lg text-center shadow-md">
+                        <span class="text-4xl mb-2 inline-block">📱</span>
+                        <p class="font-bold text-lg text-white light-mode:text-slate-900">Xamarin / React Native</p>
+                        <p class="text-sm text-slate-400 light-mode:text-slate-600">Cross-Platform Mobile Apps</p>
+                    </div>
+                    <div class="card p-5 rounded-lg text-center shadow-md">
+                        <span class="text-4xl mb-2 inline-block">🧠</span>
+                        <p class="font-bold text-lg text-white light-mode:text-slate-900">AI Integration</p>
+                        <p class="text-sm text-slate-400 light-mode:text-slate-600">Google AI, Genkit Framework</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="projects" class="py-16 md:py-24 bg-slate-950 light-mode:bg-white">
+            <div class="max-w-7xl mx-auto container-padding">
+                <h2 class="section-title text-3xl md:text-4xl font-bold text-center mb-16 text-white light-mode:text-slate-900">Featured Projects</h2>
+                
+                <div class="grid md:grid-cols-2 gap-8">
+
+                    <div class="card p-6 rounded-xl shadow-2xl flex flex-col">
+                        <h3 class="text-2xl font-semibold mb-2 text-white light-mode:text-slate-900">JobTrakr</h3>
+                        <p class="text-sm font-mono text-blue-400 light-mode:text-blue-600 mb-4">NEXT.JS • SUPABASE • GOOGLE AI</p>
+                        <p class="text-slate-300 light-mode:text-slate-700 mb-4 flex-grow">
+                            A full-stack application for tracking job applications. Utilizes Supabase for secure data management and integrates Google AI to assist with application summaries and data categorization.
+                        </p>
+                        <div class="mt-auto">
+                            <a href="#" class="inline-flex items-center text-blue-400 light-mode:text-blue-600 hover:text-blue-300 transition font-medium">
+                                View Demo 
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="ml-1 w-4 h-4">
+                                    <path d="M7 7h10v10"/><path d="M7 17 17 7"/>
+                                </svg>
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="card p-6 rounded-xl shadow-2xl flex flex-col">
+                        <h3 class="text-2xl font-semibold mb-2 text-white light-mode:text-slate-900">Vehicle Management API</h3>
+                        <p class="text-sm font-mono text-blue-400 light-mode:text-blue-600 mb-4">C# • .NET • SQL SERVER</p>
+                        <p class="text-slate-300 light-mode:text-slate-700 mb-4 flex-grow">
+                            A robust backend service designed for managing vehicle inventory, maintenance records, and user access. Highlights expertise in C#, .NET Web API development, and SQL database integration.
+                        </p>
+                        <div class="mt-auto">
+                            <a href="#" class="inline-flex items-center text-blue-400 light-mode:text-blue-600 hover:text-blue-300 transition font-medium">
+                                View Code
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="ml-1 w-4 h-4">
+                                    <path d="M7 7h10v10"/><path d="M7 17 17 7"/>
+                                </svg>
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <div class="card p-6 rounded-xl shadow-2xl flex flex-col">
+                        <h3 class="text-2xl font-semibold mb-2 text-white light-mode:text-slate-900">Internal Support System</h3>
+                        <p class="text-sm font-mono text-blue-400 light-mode:text-blue-600 mb-4">C# • .NET • SQL • QA</p>
+                        <p class="text-slate-300 light-mode:text-slate-700 mb-4 flex-grow">
+                            Developed a robust ticketing platform to streamline internal IT support workflows. Includes user authentication, incident tracking, and reporting features, ensuring high system uptime and quick resolution times.
+                        </p>
+                        <div class="mt-auto">
+                            <a href="#" class="inline-flex items-center text-blue-400 light-mode:text-blue-600 hover:text-blue-300 transition font-medium">
+                                View Case Study
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="ml-1 w-4 h-4">
+                                    <path d="M7 7h10v10"/><path d="M7 17 17 7"/>
+                                </svg>
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="card p-6 rounded-xl shadow-2xl flex flex-col">
+                        <h3 class="text-2xl font-semibold mb-2 text-white light-mode:text-slate-900">Interactive 3D Data Viz</h3>
+                        <p class="text-sm font-mono text-blue-400 light-mode:text-blue-600 mb-4">REACT • TYPESCRIPT • THREE.JS</p>
+                        <p class="text-slate-300 light-mode:text-slate-700 mb-4 flex-grow">
+                            A web application using **Three.js** to render complex datasets in an interactive 3D environment, allowing users to manipulate perspectives and filter information dynamically.
+                        </p>
+                        <div class="mt-auto">
+                            <a href="#" class="inline-flex items-center text-blue-400 light-mode:text-blue-600 hover:text-blue-300 transition font-medium">
+                                View Live
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="ml-1 w-4 h-4">
+                                    <path d="M7 7h10v10"/><path d="M7 17 17 7"/>
+                                </svg>
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="card p-6 rounded-xl shadow-2xl flex flex-col">
+                        <h3 class="text-2xl font-semibold mb-2 text-white light-mode:text-slate-900">Xamarin Mobile App</h3>
+                        <p class="text-sm font-mono text-blue-400 light-mode:text-blue-600 mb-4">C# • XAMARIN</p>
+                        <p class="text-slate-300 light-mode:text-slate-700 mb-4 flex-grow">
+                            A cross-platform mobile application developed using the C# and Xamarin framework. Demonstrates the ability to create native-feeling apps for both iOS and Android from a single codebase.
+                        </p>
+                        <div class="mt-auto">
+                            <a href="#" class="inline-flex items-center text-blue-400 light-mode:text-blue-600 hover:text-blue-300 transition font-medium">
+                                View Case Study
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="ml-1 w-4 h-4">
+                                    <path d="M7 7h10v10"/><path d="M7 17 17 7"/>
+                                </svg>
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="card p-6 rounded-xl shadow-2xl flex flex-col">
+                        <h3 class="text-2xl font-semibold mb-2 text-white light-mode:text-slate-900">AI Chat Interface</h3>
+                        <p class="text-sm font-mono text-blue-400 light-mode:text-blue-600 mb-4">NEXT.JS • TYPESCRIPT • GENKIT AI</p>
+                        <p class="text-slate-300 light-mode:text-slate-700 mb-4 flex-grow">
+                            A sleek, responsive chat application built to explore the capabilities of large language models, leveraging TypeScript for maintainability and Genkit for advanced AI workflows.
+                        </p>
+                        <div class="mt-auto">
+                            <a href="#" class="inline-flex items-center text-blue-400 light-mode:text-blue-600 hover:text-blue-300 transition font-medium">
+                                View Live
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="ml-1 w-4 h-4">
+                                    <path d="M7 7h10v10"/><path d="M7 17 17 7"/>
+                                </svg>
+                            </a>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <section id="contact" class="py-16 md:py-24 bg-slate-900 light-mode:bg-slate-50">
+            <div class="max-w-7xl mx-auto container-padding text-center">
+                <h2 class="section-title text-3xl md:text-4xl font-bold mb-16 text-white light-mode:text-slate-900">Contact & Connect</h2>
+                
+                <div class="card p-8 md:p-12 rounded-xl shadow-3xl max-w-2xl mx-auto space-y-8">
+                    <h3 class="text-2xl font-semibold text-white light-mode:text-slate-900">Ready to hire or collaborate?</h3>
+                    <p class="text-lg text-slate-300 light-mode:text-slate-700">
+                        Whether you need an IT professional to maintain system stability or a developer to build the next feature, I'm eager to contribute my skills.
                     </p>
-                </div>
-            </div>
-        </section>
-
-        <!-- Technical Toolbox (Skills) Section -->
-        <section id="skills" class="py-16">
-            <h2 class="text-3xl section-title text-white">🧰 Technical & Support Toolbox</h2>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                <div class="card p-6 rounded-xl">
-                    <h3 class="text-xl font-bold mb-4 text-blue-400 light-mode:text-blue-700">Software & Core IT Foundation</h3>
-                    <ul class="space-y-3 text-slate-300 light-mode:text-slate-700 list-disc list-inside">
-                        <li>Backend: .NET, C#, Java, Python, RESTful API</li>
-                        <li>Frontend/Mobile: React Native, JavaScript/TypeScript, HTML/CSS</li>
-                        <li>Database & Cloud: SQL, Azure, Supabase, Firebase</li>
-                        <li>Systems: Operating Systems, Networking Fundamentals, Computer Hardware</li>
-                    </ul>
-                </div>
-                <div class="card p-6 rounded-xl">
-                    <h3 class="text-xl font-bold mb-4 text-blue-400 light-mode:text-blue-700">Support & Professional Skills</h3>
-                    <ul class="space-y-3 text-slate-300 light-mode:text-slate-700 list-disc list-inside">
-                        <li>IT Support: Microsoft Office 365, Tech Setups, Troubleshooting</li>
-                        <li>Problem Solving: Logical Reasoning, Analytical Thinking, Attention to Detail</li>
-                        <li>Customer Service: Patient, Proactive Attitude, Strong Interpersonal Skills</li>
-                        <li>Adaptability: Quick Learner, Comfortable with Last-Minute Demands, Teamwork</li>
-                    </ul>
-                </div>
-            </div>
-        </section>
-
-        <!-- Featured Projects Section -->
-        <section id="projects" class="py-16">
-            <h2 class="text-3xl section-title text-white">📦 Featured Technical Projects</h2>
-            <p class="text-lg text-slate-400 light-mode:text-slate-500 mb-8 max-w-2xl">These projects demonstrate my development capabilities in full-stack, mobile, and API design, valuable for understanding system integration.</p>
-            <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                <div class="card p-6 rounded-xl">
-                    <h4 class="text-xl font-semibold mb-2 text-blue-300 light-mode:text-blue-600">JobTrakr (Full Stack)</h4>
-                    <p class="text-sm text-slate-400 light-mode:text-slate-500 mb-3">Next.js, Supabase, Tailwind, Google AI</p>
-                    <p class="text-slate-300 light-mode:text-slate-700">A job application dashboard featuring AI insights, showcasing proficiency in modern cloud databases and front-end frameworks.</p>
-                </div>
-                <div class="card p-6 rounded-xl">
-                    <h4 class="text-xl font-semibold mb-2 text-blue-300 light-mode:text-blue-600">Vehicle Management API</h4>
-                    <p class="text-sm text-slate-400 light-mode:text-slate-500 mb-3">C#, .NET, SQL</p>
-                    <p class="text-slate-300 light-mode:text-slate-700">A well-architected RESTful API for managing vehicle data, demonstrating skills in backend security, data handling, and clean code principles.</p>
-                </div>
-                <div class="card p-6 rounded-xl">
-                    <h4 class="text-xl font-semibold mb-2 text-blue-300 light-mode:text-blue-600">Xamarin Mobile App (Mobile)</h4>
-                    <p class="text-sm text-slate-400 light-mode:text-slate-500 mb-3">C#, Xamarin</p>
-                    <p class="text-slate-300 light-mode:text-slate-700">Cross-platform mobile application development using C# and Xamarin, highlighting ability to handle complex mobile environments.</p>
-                </div>
-                <div class="card p-6 rounded-xl">
-                    <h4 class="text-xl font-semibold mb-2 text-blue-300 light-mode:text-blue-600">AI Chat Interface</h4>
-                    <p class="text-sm text-slate-400 light-mode:text-slate-500 mb-3">Next.js, TypeScript, Genkit AI</p>
-                    <p class="text-slate-300 light-mode:text-slate-700">Intelligent chat UI leveraging the Genkit framework, focusing on integrating generative AI capabilities into applications.</p>
-                </div>
-            </div>
-        </section>
-
-        <!-- Relevant Experience Section -->
-        <section id="experience" class="py-16">
-            <h2 class="text-3xl section-title text-white">🤝 Professional Experience</h2>
-            <div class="space-y-6 max-w-4xl">
-                <div class="card p-6 rounded-xl">
-                    <h4 class="text-xl font-semibold text-white light-mode:text-slate-900">Op Shop Volunteer | SPCA New Zealand, Hamilton</h4>
-                    <p class="text-blue-300 light-mode:text-blue-600 text-sm mb-3">Aug 2025 – Present</p>
-                    <ul class="list-disc list-inside text-slate-300 light-mode:text-slate-700 space-y-1 ml-4 text-sm">
-                        <li>Provided professional customer service, demonstrating patient and helpful communication essential for user support.</li>
-                        <li>Supported daily operations by learning and operating new Point-of-Sale (POS) systems.</li>
-                        <li>Applied systematic quality control during sorting and organizing, highlighting attention to detail.</li>
-                    </ul>
-                </div>
-                <div class="card p-6 rounded-xl">
-                    <h4 class="text-xl font-semibold text-white light-mode:text-slate-900">Hospice Cleaner (Casual) | New Cleanland, Hamilton</h4>
-                    <p class="text-blue-300 light-mode:text-blue-600 text-sm mb-3">May 2025 – Aug 2025</p>
-                    <p class="text-slate-300 light-mode:text-slate-700 text-sm ml-4">Consistently demonstrated reliability, punctuality, and a strong work ethic in maintaining high professional standards.</p>
-                </div>
-            </div>
-        </section>
-
-        <!-- Education & Certifications Section -->
-        <section id="education" class="py-16">
-            <h2 class="text-3xl section-title text-white">🎓 Education & Certifications</h2>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                <div>
-                    <h3 class="text-2xl font-bold mb-4 text-blue-400 light-mode:text-blue-700">Academic Qualifications</h3>
-                    <div class="space-y-5">
-                        <div class="card p-4 rounded-lg">
-                            <h4 class="text-lg font-semibold text-white light-mode:text-slate-900">Diploma in Software Development Level 6</h4>
-                            <p class="text-blue-300 light-mode:text-blue-600 text-sm">ATC Vision College, Hamilton</p>
-                            <p class="text-xs text-slate-400 light-mode:text-slate-500 mt-1">Feb 2020 – Mar 2021</p>
+                    
+                    <div class="flex flex-col space-y-4 justify-center items-center">
+                        <div class="flex items-center justify-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-6 h-6 text-blue-400 mr-3">
+                                <rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/>
+                            </svg>
+                            <a href="mailto:lukeponga9@gmail.com" class="text-lg text-white light-mode:text-slate-900 hover:text-blue-400 transition">lukeponga9@gmail.com</a>
                         </div>
-                        <div class="card p-4 rounded-lg">
-                            <h4 class="text-lg font-semibold text-white light-mode:text-slate-900">Diploma in Web Development & Design Level 5</h4>
-                            <p class="text-blue-300 light-mode:text-blue-600 text-sm">ATC Vision College, Hamilton</p>
-                            <p class="text-xs text-slate-400 light-mode:text-slate-500 mt-1">Feb 2019 – Mar 2020</p>
+        
+                        <div class="flex items-center justify-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-6 h-6 text-blue-400 mr-3">
+                                <path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/>
+                            </svg>
+                            <p class="text-lg text-white light-mode:text-slate-900">Hamilton, New Zealand</p>
                         </div>
-                        <div class="card p-4 rounded-lg">
-                            <h4 class="text-lg font-semibold text-white light-mode:text-slate-900">Cert. in Business Admin & Technology Level 3</h4>
-                            <p class="text-blue-300 light-mode:text-blue-600 text-sm">ATC Vision College, Hamilton</p>
-                            <p class="text-xs text-slate-400 light-mode:text-slate-500 mt-1">Jun 2018 – Dec 2018</p>
-                        </div>
-                    </div>
-                </div>
-                <div>
-                    <h3 class="text-2xl font-bold mb-4 text-blue-400 light-mode:text-blue-700">Industry Certifications</h3>
-                    <div class="space-y-5">
-                        <div class="card p-4 rounded-lg">
-                            <h4 class="text-lg font-semibold text-white light-mode:text-slate-900">ISTQB Certified Tester Foundation Level (CTFL)</h4>
-                            <p class="text-blue-300 light-mode:text-blue-600 text-sm">ISTQB</p>
-                            <p class="text-xs text-slate-400 light-mode:text-slate-500 mt-1">Jan 2021</p>
-                        </div>
-                        <div class="card p-4 rounded-lg">
-                            <h4 class="text-lg font-semibold text-white light-mode:text-slate-900">Generative AI in 2025</h4>
-                            <p class="text-blue-300 light-mode:text-blue-600 text-sm">CodeSignal</p>
-                            <p class="text-xs text-slate-400 light-mode:text-slate-500 mt-1">Jan 2025</p>
-                        </div>
-                        <div class="card p-4 rounded-lg">
-                            <h4 class="text-lg font-semibold text-white light-mode:text-slate-900">Microsoft Build: Natural Language AI Certificate</h4>
-                            <p class="text-blue-300 light-mode:text-blue-600 text-sm">Microsoft</p>
-                            <p class="text-xs text-slate-400 light-mode:text-slate-500 mt-1">Jan 2023</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Contact Section -->
-        <section id="contact" class="py-16 mb-10">
-            <h2 class="text-3xl section-title text-white">Contact Information</h2>
-            <div class="card p-8 rounded-xl max-w-lg mx-auto">
-                <p class="text-xl text-slate-300 light-mode:text-slate-700 mb-8 text-center">
-                    Ready to contribute my technical and collaborative skills to your team.
-                </p>
-                <div class="space-y-5 text-center">
-                    <div class="flex items-center justify-center">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-6 h-6 text-blue-400 mr-3">
-                            <rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/>
-                        </svg>
-                        <a href="mailto:lukeponga9@gmail.com" class="text-lg text-white light-mode:text-slate-900 hover:text-blue-400 transition">lukeponga9@gmail.com</a>
-                    </div>
-    
-                    <div class="flex items-center justify-center">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-6 h-6 text-blue-400 mr-3">
-                            <path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/>
-                        </svg>
-                        <p class="text-lg text-white light-mode:text-slate-900">Hamilton, New Zealand</p>
                     </div>
                 </div>
             </div>
         </section>
     </main>
 
-    <!-- Footer -->
-    <footer class="bg-slate-950 py-8 border-t border-slate-800 light-mode:bg-slate-100 light-mode:border-slate-200 transition duration-500">
-        <div class="max-w-7xl mx-auto container-padding text-center text-slate-500 light-mode:text-slate-600 text-sm">
-            <p>&copy; 2025 Luke Ponga. Hybrid Technical Portfolio. All Rights Reserved.</p>
+    <footer class="bg-slate-950 py-8 border-t border-slate-800 light-mode:bg-white light-mode:border-slate-200">
+        <div class="max-w-7xl mx-auto container-padding text-center">
+            <p class="text-sm text-slate-500 light-mode:text-slate-500">&copy; 2025 Luke Ponga. All rights reserved.</p>
         </div>
     </footer>
 
-    <script src="js/script.js"></script>
+    <script src="/js/script.js"></script>
 </body>
 </html>
