@@ -1,14 +1,15 @@
-/* Base Styles */
+/* Base Styles: Sets font, background, and default colors based on CSS variables */
 body {
     font-family: 'Inter', sans-serif;
     background-color: var(--dark-bg);
     color: var(--text-color);
     scroll-behavior: smooth;
+    /* Smooth transition for theme change */
     transition: background-color 0.5s, color 0.5s;
 }
 
+/* Define CSS Variables for Dark Mode (Default) */
 :root {
-    /* Dark Mode Defaults */
     --primary-color: #3b82f6; /* Tailwind blue-500 */
     --dark-bg: #0c121e;
     --card-bg: #1a2434;
@@ -17,7 +18,7 @@ body {
     --border-color: rgba(241, 245, 249, 0.1);
 }
 
-/* Light Mode Styles */
+/* Overwrite CSS Variables for Light Mode */
 body.light-mode {
     --primary-color: #1d4ed8; /* Tailwind blue-700 */
     --dark-bg: #f8fafc; /* Tailwind slate-50 */
@@ -27,7 +28,7 @@ body.light-mode {
     --border-color: rgba(15, 23, 42, 0.1); /* Darker border */
 }
 
-/* Section Title Styling: Primary color with an underscore effect */
+/* Section Title Styling: Adds a primary color underline effect */
 .section-title {
     position: relative;
     display: inline-block;
@@ -45,7 +46,7 @@ body.light-mode {
     transition: background-color 0.5s;
 }
 
-/* Card Hover Effect */
+/* Card Hover Effect: Provides a subtle lift, shadow, and border change */
 .card {
     transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
     background-color: var(--card-bg);
@@ -58,7 +59,7 @@ body.light-mode {
     border-color: var(--primary-color);
 }
 
-/* Utility for Mobile-Friendly Containers */
+/* Utility for Mobile-Friendly Containers: Standardized padding */
 .container-padding {
     padding-left: 1rem;
     padding-right: 1rem;
@@ -70,7 +71,7 @@ body.light-mode {
     }
 }
 
-/* Ensure smooth transition for nav links for active state */
+/* Navigation Link Styling */
 .nav-link {
     transition: color 0.3s ease-in-out;
     color: var(--secondary-text);
@@ -80,7 +81,7 @@ body.light-mode {
     color: var(--primary-color);
 }
 
-/* Canvas for Hero Background Animation */
+/* Canvas for Hero Background Animation: Fixed positioning within the Hero section */
 #hero-canvas {
     position: absolute;
     top: 0;
