@@ -1,26 +1,23 @@
-/* Base Styles: Sets font, background, and default colors based on CSS variables */
+/* Base Styles */
 body {
     font-family: 'Inter', sans-serif;
     background-color: var(--dark-bg);
     color: var(--text-color);
     scroll-behavior: smooth;
-    /* Smooth transition for theme change */
     transition: background-color 0.5s, color 0.5s;
 }
 
-/* Define CSS Variables for Dark Mode (Default) */
 :root {
+    /* Dark Mode Defaults */
     --primary-color: #3b82f6; /* Tailwind blue-500 */
     --dark-bg: #0c121e;
     --card-bg: #1a2434;
     --text-color: #f1f5f9;
     --secondary-text: #94a3b8; /* slate-400 */
     --border-color: rgba(241, 245, 249, 0.1);
-    /* New variable for the subtle particle lines color */
-    --particle-color: rgba(59, 130, 246, 0.4); 
 }
 
-/* Overwrite CSS Variables for Light Mode */
+/* Light Mode Styles */
 body.light-mode {
     --primary-color: #1d4ed8; /* Tailwind blue-700 */
     --dark-bg: #f8fafc; /* Tailwind slate-50 */
@@ -28,11 +25,9 @@ body.light-mode {
     --text-color: #0f172a; /* Tailwind slate-900 */
     --secondary-text: #475569; /* slate-600 */
     --border-color: rgba(15, 23, 42, 0.1); /* Darker border */
-    /* Update particle color to be less visible in light mode */
-    --particle-color: rgba(30, 64, 175, 0.2); 
 }
 
-/* Section Title Styling: Adds a primary color underline effect */
+/* Section Title Styling: Primary color with an underscore effect */
 .section-title {
     position: relative;
     display: inline-block;
@@ -41,8 +36,7 @@ body.light-mode {
     content: '';
     position: absolute;
     bottom: -8px;
-    left: 50%;
-    transform: translateX(-50%);
+    left: 0;
     width: 50%;
     height: 3px;
     background-color: var(--primary-color);
@@ -50,14 +44,12 @@ body.light-mode {
     transition: background-color 0.5s;
 }
 
-/* Card Hover Effect: Provides a subtle lift, shadow, and border change */
+/* Card Hover Effect */
 .card {
     transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
     background-color: var(--card-bg);
     border: 1px solid var(--border-color);
     color: var(--text-color);
-    /* Optimization: Hint for browser regarding upcoming changes */
-    will-change: transform, box-shadow; 
 }
 .card:hover {
     box-shadow: 0 10px 20px -5px rgba(59, 130, 246, 0.3);
@@ -65,7 +57,7 @@ body.light-mode {
     border-color: var(--primary-color);
 }
 
-/* Utility for Mobile-Friendly Containers: Standardized padding */
+/* Utility for Mobile-Friendly Containers */
 .container-padding {
     padding-left: 1rem;
     padding-right: 1rem;
@@ -77,7 +69,7 @@ body.light-mode {
     }
 }
 
-/* Navigation Link Styling */
+/* Ensure smooth transition for nav links for active state */
 .nav-link {
     transition: color 0.3s ease-in-out;
     color: var(--secondary-text);
@@ -87,12 +79,101 @@ body.light-mode {
     color: var(--primary-color);
 }
 
-/* Canvas for Hero Background Animation: Fixed positioning within the Hero section */
-#hero-canvas {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: -1; /* Ensures canvas stays behind content */
+/* --- Projects Grid Styles (from user) --- */
+.portfolio-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 18px;
+  align-items: start;
+}
+.tile {
+  /* Using user-provided dark mode colors for a specific project tile look */
+  background: #0f172a;
+  color: #e6eef8;
+  border-radius: 10px;
+  padding: 16px;
+  box-shadow: 0 6px 18px rgba(2,6,23,0.35);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  transition: all 0.3s ease;
+  border: 1px solid transparent; /* Required for consistent hover transition */
+}
+/* Adding a subtle hover effect consistent with the existing .card style, using the primary button color */
+.tile:hover {
+    box-shadow: 0 10px 20px -5px rgba(6, 182, 212, 0.3); 
+    transform: translateY(-3px);
+    border-color: #06b6d4; /* Using the primary button color for border */
+}
+.tile h3 {
+  margin: 0;
+  font-size: 1.05rem;
+  color: #ffffff;
+}
+.tile p {
+  margin: 0;
+  color: #cbd5e1;
+  font-size: 0.95rem;
+  line-height: 1.25;
+}
+.badges {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+.badge {
+  background: rgba(255,255,255,0.06);
+  color: #cbd5e1;
+  padding: 6px 8px;
+  border-radius: 999px;
+  font-size: 0.8rem;
+  white-space: nowrap; 
+}
+.actions {
+  margin-top: auto;
+  display: flex;
+  gap: 10px;
+}
+.btn {
+  display: inline-block;
+  padding: 8px 12px;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 0.9rem;
+  white-space: nowrap; 
+  transition: background-color 0.3s, border-color 0.3s, color 0.3s;
+}
+.btn-primary { background: #06b6d4; color: #062b2e; } /* User's preferred cyan/teal color */
+.btn-primary:hover { opacity: 0.85; }
+.btn-ghost { background: transparent; border: 1px solid rgba(255,255,255,0.06); color: #cbd5e1; }
+.btn-ghost:hover { border-color: #06b6d4; color: #ffffff; }
+
+/* Light Mode Overrides for Project Grid */
+body.light-mode .tile {
+  background: #ffffff;
+  color: var(--text-color); 
+  box-shadow: 0 6px 18px rgba(12,18,28,0.06);
+}
+body.light-mode .tile:hover {
+    box-shadow: 0 10px 20px -5px rgba(6, 182, 212, 0.2);
+    border-color: #06b6d4;
+}
+body.light-mode .tile h3 {
+    color: var(--text-color); 
+}
+body.light-mode .tile p {
+  color: var(--secondary-text); 
+}
+body.light-mode .badge {
+  background: #f1f5f9;
+  color: var(--text-color); 
+}
+body.light-mode .btn-ghost { 
+  border: 1px solid rgba(15, 23, 42, 0.1); 
+  color: var(--secondary-text); 
+}
+body.light-mode .btn-ghost:hover { 
+  border-color: #06b6d4; 
+  color: #06b6d4; 
 }

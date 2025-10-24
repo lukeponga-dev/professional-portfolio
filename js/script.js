@@ -1,196 +1,181 @@
-// --- Theme Toggle Functionality ---
+// Theme Toggle Functionality
 
+// Selects the theme toggle button and icons for dark/light mode switching
 const themeToggle = document.getElementById('themeToggle');
 const moonIcon = document.getElementById('moonIcon');
 const sunIcon = document.getElementById('sunIcon');
 const body = document.body;
 
-/**
- * Gets the current value of a CSS variable from the body element.
- * @param {string} variableName - The name of the CSS variable (e.g., '--particle-color').
- * @returns {string} The computed value of the variable.
- */
-function getCssVariable(variableName) {
-    return getComputedStyle(body).getPropertyValue(variableName).trim();
-}
-
-// 1. Initial Theme Setup: Check localStorage for user preference
+// 1. Initialize Theme from localStorage
+// Retrieves the saved theme from localStorage or defaults to 'dark'
 const currentTheme = localStorage.getItem('theme') || 'dark';
 if (currentTheme === 'light') {
     body.classList.add('light-mode');
-    // Ensure correct icon is shown on load
-    if (moonIcon) moonIcon.classList.add('hidden'); 
-    if (sunIcon) sunIcon.classList.remove('hidden'); 
+    if (moonIcon) moonIcon.classList.add('hidden'); // Hides moon icon in light mode
+    if (sunIcon) sunIcon.classList.remove('hidden'); // Shows sun icon in light mode
 }
 
-// 2. Theme Toggle Listener
+// 2. Add click listener to toggle theme
 if (themeToggle) {
     themeToggle.addEventListener('click', () => {
         body.classList.toggle('light-mode');
-        
-        // Save the new state and toggle icons
+
         if (body.classList.contains('light-mode')) {
-            localStorage.setItem('theme', 'light');
+            localStorage.setItem('theme', 'light'); // Saves light mode preference
             if (moonIcon) moonIcon.classList.add('hidden');
             if (sunIcon) sunIcon.classList.remove('hidden');
         } else {
-            localStorage.setItem('theme', 'dark');
+            localStorage.setItem('theme', 'dark'); // Saves dark mode preference
             if (moonIcon) moonIcon.classList.remove('hidden');
             if (sunIcon) sunIcon.classList.add('hidden');
         }
+        // Force particle redraw on theme change for color update
+        // The animation loop handles this, but forcing a resize can ensure immediate refresh if needed
+        const canvas = document.getElementById('heroCanvas');
+        if (canvas) setCanvasSize(); 
     });
 }
 
-// --- Smooth Scrolling & Mobile Menu Management ---
 
-// Smooth scroll with offset for sticky header
-document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener('click', function (e) {
-        e.preventDefault();
-        
-        const targetId = this.getAttribute('href');
-        const targetElement = document.querySelector(targetId);
+// --- Mobile Menu Toggle Functionality ---
+const mobileMenuButton = document.getElementById('mobileMenuButton');
+const mobileMenu = document.getElementById('mobileMenu');
+const menuIcon = document.getElementById('menuIcon');
+const closeIcon = document.getElementById('closeIcon');
+const mobileLinks = document.querySelectorAll('.mobile-nav-link');
 
-        if (targetElement) {
-            // Compensate for the sticky navigation bar height (80px is a good estimate)
-            const headerOffset = 80; 
-            const elementPosition = targetElement.offsetTop;
-            const offsetPosition = elementPosition - headerOffset;
+function toggleMobileMenu() {
+    mobileMenu.classList.toggle('hidden');
+    const isExpanded = mobileMenu.classList.contains('hidden') ? 'false' : 'true';
+    mobileMenuButton.setAttribute('aria-expanded', isExpanded);
 
-            window.scrollTo({
-                top: offsetPosition,
-                behavior: "smooth"
-            });
-        }
-        
-        // Close mobile menu if it's open
-        const mobileMenu = document.getElementById('mobileMenu');
-        if (mobileMenu && !mobileMenu.classList.contains('hidden')) {
-            mobileMenu.classList.add('hidden');
+    // Toggle icons
+    if (menuIcon && closeIcon) {
+        menuIcon.classList.toggle('hidden');
+        closeIcon.classList.toggle('hidden');
+    }
+}
+
+if (mobileMenuButton) {
+    mobileMenuButton.addEventListener('click', toggleMobileMenu);
+}
+
+// Close menu when a link is clicked (good mobile UX)
+mobileLinks.forEach(link => {
+    link.addEventListener('click', () => {
+        // Only close if it's currently open
+        if (!mobileMenu.classList.contains('hidden')) {
+            toggleMobileMenu();
         }
     });
 });
 
-// Mobile Menu Toggle Functionality
-const mobileMenuButton = document.getElementById('mobileMenuButton');
-const mobileMenu = document.getElementById('mobileMenu');
 
-if (mobileMenuButton && mobileMenu) {
-    mobileMenuButton.addEventListener('click', () => {
-        mobileMenu.classList.toggle('hidden');
+// --- Header Scroll Effect ---
+const header = document.querySelector('header');
+const scrollThreshold = 50; // Distance in pixels before the header changes
+
+/**
+ * Toggles header background based on scroll position.
+ * Makes it fully opaque and adds a heavier shadow when scrolled.
+ */
+function handleScroll() {
+    if (!header) return; // Exit if header is not found
+
+    if (window.scrollY > scrollThreshold) {
+        // Classes for the 'scrolled' state: fully opaque background and a stronger shadow
+        header.classList.add('bg-slate-900', 'shadow-xl', 'light-mode:bg-white', 'scrolled');
+        header.classList.remove('bg-slate-900/90', 'light-mode:bg-white/90'); // Remove semi-transparent classes
+    } else {
+        // Classes for the 'at top' state: semi-transparent/blurred background
+        header.classList.remove('bg-slate-900', 'shadow-xl', 'light-mode:bg-white', 'scrolled');
+        header.classList.add('bg-slate-900/90', 'light-mode:bg-white/90'); // Restore semi-transparent classes
+    }
+}
+
+// Attach the listener and run once on load to handle refresh state
+document.addEventListener('scroll', handleScroll);
+handleScroll();
+
+
+// --- Hero Canvas Particle Animation ---
+let canvas, ctx, particles, particleCount;
+
+// Function to set canvas dimensions based on its parent container
+function setCanvasSize() {
+    if (!canvas) return;
+    
+    // Get the actual width and height of the canvas element from the layout
+    const container = canvas.parentElement;
+    canvas.width = container.clientWidth;
+    canvas.height = container.clientHeight;
+
+    // Reinitialize particles only on first load
+    if (particles.length === 0) {
+         for (let i = 0; i < particleCount; i++) {
+            particles.push(new Particle());
+        }
+    }
+}
+
+// Particle class definition
+class Particle {
+    constructor() {
+        this.x = Math.random() * canvas.width; // Random x position within canvas bounds
+        this.y = Math.random() * canvas.height; // Random y position within canvas bounds
+        this.vx = (Math.random() - 0.5) * 0.5; // Random x velocity (slow movement)
+        this.vy = (Math.random() - 0.5) * 0.5; // Random y velocity (slow movement)
+        this.radius = Math.random() * 2 + 0.5; // Random radius between 0.5 and 2.5
+    }
+
+    update() {
+        this.x += this.vx; // Updates position based on velocity
+        this.y += this.vy;
+
+        // Bounce off edges (Reverse velocity on boundary hit)
+        if (this.x < 0 || this.x > canvas.width) this.vx *= -1;
+        if (this.y < 0 || this.y > canvas.height) this.vy *= -1;
+    }
+
+    draw() {
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2); // Draws a circle
+
+        // Use a color that adapts slightly to the theme but remains subtle
+        // Blue for dark mode, lighter blue for light mode
+        const color = body.classList.contains('light-mode') ? 'rgba(59, 130, 246, 0.2)' : 'rgba(59, 130, 246, 0.5)';
+        ctx.fillStyle = color;
+        ctx.fill();
+    }
+}
+
+// Animation loop function
+function animate() {
+    // Clear the canvas with a slight transparency to create a subtle trail effect
+    // The background color matches the body background in both modes
+    const clearColor = body.classList.contains('light-mode') ? 'rgba(248, 250, 252, 0.3)' : 'rgba(12, 18, 30, 0.3)';
+    ctx.fillStyle = clearColor;
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+    particles.forEach(particle => {
+        particle.update(); // Updates each particle
+        particle.draw(); // Draws each particle
     });
+    requestAnimationFrame(animate); // Requests next frame
 }
 
-// --- Canvas Particle Animation for Hero Section ---
+window.onload = function () {
+    canvas = document.getElementById('heroCanvas');
+    if (!canvas) return; // Exit if canvas element doesn't exist
 
-const canvas = document.getElementById('hero-canvas');
-// Check if canvas element exists before getting context
-if (canvas) {
-    const ctx = canvas.getContext('2d');
-    const particles = [];
-    const particleCount = 75;
-    const connectDistance = 120; // Max distance for drawing lines
+    ctx = canvas.getContext('2d');
+    particleCount = 50;
+    particles = [];
+    
+    // Initial setup and event listeners
+    setCanvasSize();
+    window.addEventListener('resize', setCanvasSize);
 
-    // Function to ensure canvas size matches its container (responsive)
-    function resizeCanvas() {
-        // Use offsetWidth/Height to get the actual rendered size
-        canvas.width = canvas.offsetWidth;
-        canvas.height = canvas.offsetHeight;
-    }
-
-    // Set initial size and listen for window resize events
-    resizeCanvas();
-    window.addEventListener('resize', resizeCanvas);
-
-
-    // Particle class definition
-    class Particle {
-        constructor() {
-            // Random initial position within canvas bounds
-            this.x = Math.random() * canvas.width;
-            this.y = Math.random() * canvas.height;
-            // Small random velocity for subtle movement
-            this.vx = (Math.random() - 0.5) * 0.5; 
-            this.vy = (Math.random() - 0.5) * 0.5; 
-            this.radius = Math.random() * 2; 
-        }
-
-        update() {
-            this.x += this.vx; 
-            this.y += this.vy;
-
-            // Boundary collision detection: Reverse velocity if hitting an edge
-            if (this.x < 0 || this.x > canvas.width) this.vx *= -1; 
-            if (this.y < 0 || this.y > canvas.height) this.vy *= -1; 
-        }
-
-        draw() {
-            ctx.beginPath();
-            ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2); 
-            // Read particle color dynamically from CSS
-            const particleColor = getCssVariable('--particle-color');
-            ctx.fillStyle = particleColor || 'rgba(59, 130, 246, 0.5)';
-            ctx.fill();
-        }
-    }
-
-    // Function to connect particles with lines (the "network" effect)
-    function connectParticles() {
-        // Get the color dynamically to ensure theme change is reflected
-        const particleColor = getCssVariable('--particle-color');
-
-        for (let i = 0; i < particleCount; i++) {
-            for (let j = i + 1; j < particleCount; j++) {
-                const p1 = particles[i];
-                const p2 = particles[j];
-
-                // Calculate distance squared (faster than Math.sqrt for comparison)
-                const distanceSq = (p1.x - p2.x) ** 2 + (p1.y - p2.y) ** 2;
-
-                if (distanceSq < connectDistance ** 2) {
-                    // Calculate opacity based on distance: closer = more opaque
-                    const opacity = 1 - (distanceSq / (connectDistance ** 2));
-                    
-                    ctx.beginPath();
-                    // Set line color dynamically, fading out based on distance
-                    // We reduce the maximum opacity of the line slightly (e.g., * 0.4) 
-                    // to keep the lines subtle and the points the focus.
-                    ctx.strokeStyle = particleColor.replace(/,\s*([\d.]+)\)/, `, ${opacity * 0.4})`);
-                    ctx.lineWidth = 0.5; // Subtle line thickness
-                    ctx.moveTo(p1.x, p1.y);
-                    ctx.lineTo(p2.x, p2.y);
-                    ctx.stroke();
-                }
-            }
-        }
-    }
-
-    // Initialize all particles
-    for (let i = 0; i < particleCount; i++) {
-        particles.push(new Particle());
-    }
-
-    // Main animation loop
-    function animate() {
-        ctx.clearRect(0, 0, canvas.width, canvas.height); // Always clear the canvas first
-
-        // Only draw particles/lines when in dark mode (where the effect is intended for contrast)
-        // Note: The particle color variable is set to a low opacity in light mode, so this check 
-        // prevents drawing a near-invisible effect and saves CPU cycles.
-        if (!body.classList.contains('light-mode')) {
-            connectParticles();
-            particles.forEach(particle => {
-                particle.update(); 
-                particle.draw(); 
-            });
-        }
-        
-        requestAnimationFrame(animate); // Requests the next frame for continuous animation
-    }
-
-    // Start the animation loop after the DOM is fully loaded and canvas is ready
-    window.onload = function () {
-        animate();
-    }
-}
-
+    // Start the animation loop
+    animate();
+};

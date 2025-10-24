@@ -4,309 +4,329 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Luke Ponga - Developer and IT Support Specialist</title>
+    <!-- Load Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
-
     <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
-    <!-- Header and navbar-->
+    <!-- Navigation Bar -->
+    <!-- Initial classes set to semi-transparent (bg-slate-900/90) and blurred (backdrop-blur-md) -->
     <header class="sticky top-0 z-50 bg-slate-900/90 backdrop-blur-md shadow-lg border-b border-slate-700 light-mode:bg-white/90 light-mode:border-slate-200 transition duration-500">
         <nav class="max-w-7xl mx-auto container-padding py-4 flex justify-between items-center">
             <a href="#hero" class="text-2xl font-extrabold text-white light-mode:text-slate-900 tracking-wider transition duration-500">Luke Ponga</a>
+            
+            <!-- Desktop Navigation Links -->
             <div class="space-x-4 hidden md:flex text-slate-300 light-mode:text-slate-600">
                 <a href="#about" class="nav-link">About</a>
                 <a href="#skills" class="nav-link">Skills</a>
                 <a href="#projects" class="nav-link">Projects</a>
                 <a href="#contact" class="nav-link">Contact</a>
             </div>
-            
+
+            <!-- Theme Toggle & Mobile Menu Button -->
             <div class="flex items-center space-x-4">
-                <button id="themeToggle" class="p-2 rounded-full hover:bg-slate-700 light-mode:hover:bg-slate-200 transition duration-300 focus:outline-none" aria-label="Toggle theme">
-                    <svg id="moonIcon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-6 h-6 text-white light-mode:text-slate-900">
+                <!-- Theme Toggle Button (Desktop/Mobile) -->
+                <button id="themeToggle" class="p-2 rounded-full hover:bg-slate-800/50 light-mode:hover:bg-slate-200 transition duration-300" aria-label="Toggle theme">
+                    <!-- Moon Icon (Dark Mode) -->
+                    <svg id="moonIcon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-6 h-6 text-yellow-400">
                         <path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/>
                     </svg>
-                    <svg id="sunIcon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-6 h-6 text-white light-mode:text-slate-900 hidden">
+                    <!-- Sun Icon (Light Mode) -->
+                    <svg id="sunIcon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-6 h-6 text-amber-500 hidden">
                         <circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.34 17.66-1.41 1.41"/><path d="m19.07 4.93-1.41 1.41"/>
                     </svg>
                 </button>
-                <button id="mobileMenuButton" class="p-2 rounded-lg md:hidden focus:outline-none hover:bg-slate-700 light-mode:hover:bg-slate-200 transition duration-300" aria-label="Toggle mobile menu">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-6 h-6 text-white light-mode:text-slate-900">
-                        <line x1="3" x2="21" y1="12" y2="12"/><line x1="3" x2="21" y1="6" y2="6"/><line x1="3" x2="21" y1="18" y2="18"/>
+
+                <!-- Mobile Menu Button (Hamburger/Close Icon) -->
+                <button id="mobileMenuButton" class="p-2 rounded-full hover:bg-slate-800/50 light-mode:hover:bg-slate-200 transition duration-300 md:hidden" aria-label="Open menu" aria-expanded="false">
+                    <!-- Hamburger Icon -->
+                    <svg id="menuIcon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-6 h-6 text-white light-mode:text-slate-900">
+                        <line x1="4" x2="20" y1="12" y2="12"/><line x1="4" x2="20" y1="6" y2="6"/><line x1="4" x2="20" y1="18" y2="18"/>
+                    </svg>
+                    <!-- Close Icon (Hidden by default) -->
+                    <svg id="closeIcon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-6 h-6 text-white light-mode:text-slate-900 hidden">
+                        <path d="M18 6 6 18"/><path d="m6 6 12 12"/>
                     </svg>
                 </button>
             </div>
         </nav>
-        
-        <div id="mobileMenu" class="md:hidden hidden transition-all duration-300 ease-in-out">
-            <div class="flex flex-col space-y-2 p-4 text-slate-300 light-mode:text-slate-600 bg-slate-900 light-mode:bg-white border-t border-slate-700 light-mode:border-slate-200">
-                <a href="#about" class="nav-link py-2 text-center border-b border-slate-800 light-mode:border-slate-200">About</a>
-                <a href="#skills" class="nav-link py-2 text-center border-b border-slate-800 light-mode:border-slate-200">Skills</a>
-                <a href="#projects" class="nav-link py-2 text-center border-b border-slate-800 light-mode:border-slate-200">Projects</a>
-                <a href="#contact" class="nav-link py-2 text-center">Contact</a>
-            </div>
-        </div>
     </header>
 
-    <main>
-        <section id="hero" class="relative overflow-hidden pt-32 pb-24 md:pt-48 md:pb-36">
-            <canvas id="hero-canvas"></canvas>
+    <!-- Mobile Menu (Collapsed by default, to be toggled by JS) -->
+    <!-- We use 'absolute top-[68px]' to place it directly under the header, adjust px if header height changes -->
+    <div id="mobileMenu" class="md:hidden absolute top-[68px] left-0 w-full bg-slate-900/95 light-mode:bg-white/95 backdrop-blur-md shadow-xl z-40 hidden transition duration-300">
+        <div class="flex flex-col items-center space-y-2 py-4 text-slate-300 light-mode:text-slate-600">
+            <!-- Mobile nav links now have the 'mobile-nav-link' class for easy JS selection -->
+            <a href="#about" class="mobile-nav-link w-11/12 text-center py-3 hover:bg-slate-800/70 light-mode:hover:bg-slate-100 rounded-lg font-medium text-lg">About</a>
+            <a href="#skills" class="mobile-nav-link w-11/12 text-center py-3 hover:bg-slate-800/70 light-mode:hover:bg-slate-100 rounded-lg font-medium text-lg">Skills</a>
+            <a href="#projects" class="mobile-nav-link w-11/12 text-center py-3 hover:bg-slate-800/70 light-mode:hover:bg-slate-100 rounded-lg font-medium text-lg">Projects</a>
+            <a href="#contact" class="mobile-nav-link w-11/12 text-center py-3 hover:bg-slate-800/70 light-mode:hover:bg-slate-100 rounded-lg font-medium text-lg">Contact</a>
+        </div>
+    </div>
 
-            <div class="max-w-7xl mx-auto container-padding relative z-10 text-center">
-                <h1 class="text-4xl md:text-6xl font-extrabold text-white light-mode:text-slate-900 leading-tight mb-4">
-                    Luke Ponga
-                </h1>
-                <p class="text-xl md:text-3xl font-medium text-blue-400 light-mode:text-blue-700 mb-8">
-                    IT Support Specialist & Software Developer
-                </p>
-                <p class="max-w-3xl mx-auto text-lg text-slate-300 light-mode:text-slate-700 mb-12">
-                    Bridging technical expertise with robust quality assurance. Dedicated to problem-solving, system stability, and continuous learning in modern development and support environments.
-                </p>
-                <div class="flex justify-center space-x-6">
-                    <a href="#contact" class="px-8 py-3 bg-blue-600 text-white font-semibold rounded-full shadow-lg hover:bg-blue-700 transition duration-300 transform hover:scale-105">
-                        Get In Touch
-                    </a>
-                    <a href="#projects" class="px-8 py-3 bg-transparent border-2 border-blue-600 text-blue-400 light-mode:text-blue-700 font-semibold rounded-full hover:bg-blue-600 hover:text-white transition duration-300 transform hover:scale-105">
-                        View Projects
-                    </a>
+    <!-- Hero Section -->
+    <section id="hero" class="relative overflow-hidden min-h-screen flex items-center justify-center container-padding">
+        <!-- Canvas for particle background -->
+        <canvas id="heroCanvas" class="absolute inset-0 z-0"></canvas>
+        <div class="relative z-10 text-center py-16">
+            <p class="text-blue-400 font-semibold text-lg mb-4">Hi, I'm</p>
+            <h1 class="text-6xl sm:text-7xl lg:text-8xl font-black mb-4 text-white light-mode:text-slate-900 leading-tight">
+                Luke Ponga
+            </h1>
+            <p class="text-2xl sm:text-3xl font-light text-slate-300 light-mode:text-slate-600 mb-8">
+                A <span class="text-blue-400 font-semibold">Web Developer</span> and <span class="text-blue-400 font-semibold">IT Support Specialist</span>.
+            </p>
+            <a href="#contact" class="inline-block px-8 py-3 bg-blue-600 text-white font-bold rounded-full shadow-lg hover:bg-blue-700 transition duration-300 transform hover:scale-105">
+                Get In Touch
+            </a>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-16 sm:py-24 container-padding">
+        <div class="max-w-7xl mx-auto">
+            <h2 class="section-title text-4xl font-bold mb-12 text-center">About Me</h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+                <!-- Image Placeholder -->
+                <div class="rounded-xl overflow-hidden shadow-2xl bg-slate-800 light-mode:bg-slate-100 p-4">
+                    <!-- Image of a person working on a computer at a desk, with clean, modern design -->
                 </div>
-            </div>
-        </section>
-
-        <section id="about" class="py-16 md:py-24 bg-slate-950 light-mode:bg-white">
-            <div class="max-w-7xl mx-auto container-padding">
-                <h2 class="section-title text-3xl md:text-4xl font-bold text-center mb-16 text-white light-mode:text-slate-900">About Me</h2>
                 
-                <div class="grid md:grid-cols-2 gap-12 items-center">
-                    <div class="space-y-6 text-lg text-slate-300 light-mode:text-slate-700">
-                        <p>I am a certified IT professional with a solid background in software development and quality assurance. Having completed a **Level 6 Diploma in Software Development** and achieving the **ISTQB Certified Tester Foundation Level (CTFL)**, I bring a unique, quality-focused perspective to every challenge.</p>
-                        
-                        <p>My technical expertise spans **C#, .NET**, and **SQL** for robust back-end systems, complemented by modern web technologies like **Next.js, TypeScript**, and **Supabase**. I am highly adaptable and thrive on applying structured problem-solving techniques, whether I'm debugging code or resolving a critical user support issue.</p>
-                        
-                        <p>Currently seeking roles where I can contribute to smooth system operations, provide reliable IT support, and grow my skills in database management and full-stack development. I am a quick learner with a positive, patient attitude, always eager to contribute to a productive team environment.</p>
-                    </div>
-                    
-                    <div class="card p-6 rounded-xl shadow-2xl">
-                        <h3 class="text-2xl font-semibold mb-6 text-white light-mode:text-slate-900">Key Qualifications</h3>
-                        <ul class="space-y-4">
-                            <li class="flex items-start">
-                                <span class="text-blue-400 light-mode:text-blue-600 mr-3 text-2xl">✓</span>
-                                <div>
-                                    <p class="font-medium text-white light-mode:text-slate-900">ISTQB CTFL</p>
-                                    <p class="text-sm text-slate-400 light-mode:text-slate-600">Certified Tester Foundation Level - demonstrating proficiency in structured software testing and quality assurance.</p>
-                                </div>
-                            </li>
-                            <li class="flex items-start">
-                                <span class="text-blue-400 light-mode:text-blue-600 mr-3 text-2xl">✓</span>
-                                <div>
-                                    <p class="font-medium text-white light-mode:text-slate-900">Level 6 Diploma</p>
-                                    <p class="text-sm text-slate-400 light-mode:text-slate-600">Software Development (ATC Vision College) - solid foundation in computer science and programming principles.</p>
-                                </div>
-                            </li>
-                            <li class="flex items-start">
-                                <span class="text-blue-400 light-mode:text-blue-600 mr-3 text-2xl">✓</span>
-                                <div>
-                                    <p class="font-medium text-white light-mode:text-slate-900">Generative AI Certificate</p>
-                                    <p class="text-sm text-slate-400 light-mode:text-slate-600">Knowledge of integrating modern AI models (e.g., Google AI, Genkit) into applications.</p>
-                                </div>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section id="skills" class="py-16 md:py-24 bg-slate-900 light-mode:bg-slate-50">
-            <div class="max-w-7xl mx-auto container-padding">
-                <h2 class="section-title text-3xl md:text-4xl font-bold text-center mb-16 text-white light-mode:text-slate-900">Technical Skills</h2>
-                
-                <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-                    <div class="card p-5 rounded-lg text-center shadow-md">
-                        <span class="text-4xl mb-2 inline-block">💻</span>
-                        <p class="font-bold text-lg text-white light-mode:text-slate-900">C# / .NET</p>
-                        <p class="text-sm text-slate-400 light-mode:text-slate-600">Enterprise Backend Development</p>
-                    </div>
-                    <div class="card p-5 rounded-lg text-center shadow-md">
-                        <span class="text-4xl mb-2 inline-block">🚀</span>
-                        <p class="font-bold text-lg text-white light-mode:text-slate-900">JavaScript/TypeScript</p>
-                        <p class="text-sm text-slate-400 light-mode:text-slate-600">Modern Web & App Logic</p>
-                    </div>
-                    <div class="card p-5 rounded-lg text-center shadow-md">
-                        <span class="text-4xl mb-2 inline-block">💾</span>
-                        <p class="font-bold text-lg text-white light-mode:text-slate-900">SQL</p>
-                        <p class="text-sm text-slate-400 light-mode:text-slate-600">Database Management & Querying</p>
-                    </div>
-                    <div class="card p-5 rounded-lg text-center shadow-md">
-                        <span class="text-4xl mb-2 inline-block">🌐</span>
-                        <p class="font-bold text-lg text-white light-mode:text-slate-900">React / Next.js</p>
-                        <p class="text-sm text-slate-400 light-mode:text-slate-600">Modern Frontend & Full-Stack</p>
-                    </div>
-                    <div class="card p-5 rounded-lg text-center shadow-md">
-                        <span class="text-4xl mb-2 inline-block">🛠️</span>
-                        <p class="font-bold text-lg text-white light-mode:text-slate-900">IT Support & HD</p>
-                        <p class="text-sm text-slate-400 light-mode:text-slate-600">Troubleshooting & System Maint.</p>
-                    </div>
-                    <div class="card p-5 rounded-lg text-center shadow-md">
-                        <span class="text-4xl mb-2 inline-block">✅</span>
-                        <p class="font-bold text-lg text-white light-mode:text-slate-900">Quality Assurance</p>
-                        <p class="text-sm text-slate-400 light-mode:text-slate-600">ISTQB Principles, Testing</p>
-                    </div>
-                    <div class="card p-5 rounded-lg text-center shadow-md">
-                        <span class="text-4xl mb-2 inline-block">📱</span>
-                        <p class="font-bold text-lg text-white light-mode:text-slate-900">Xamarin / React Native</p>
-                        <p class="text-sm text-slate-400 light-mode:text-slate-600">Cross-Platform Mobile Apps</p>
-                    </div>
-                    <div class="card p-5 rounded-lg text-center shadow-md">
-                        <span class="text-4xl mb-2 inline-block">🧠</span>
-                        <p class="font-bold text-lg text-white light-mode:text-slate-900">AI Integration</p>
-                        <p class="text-sm text-slate-400 light-mode:text-slate-600">Google AI, Genkit Framework</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section id="projects" class="py-16 md:py-24 bg-slate-950 light-mode:bg-white">
-            <div class="max-w-7xl mx-auto container-padding">
-                <h2 class="section-title text-3xl md:text-4xl font-bold text-center mb-16 text-white light-mode:text-slate-900">Featured Projects</h2>
-                
-                <div class="grid md:grid-cols-2 gap-8">
-
-                    <div class="card p-6 rounded-xl shadow-2xl flex flex-col">
-                        <h3 class="text-2xl font-semibold mb-2 text-white light-mode:text-slate-900">JobTrakr</h3>
-                        <p class="text-sm font-mono text-blue-400 light-mode:text-blue-600 mb-4">NEXT.JS • SUPABASE • GOOGLE AI</p>
-                        <p class="text-slate-300 light-mode:text-slate-700 mb-4 flex-grow">
-                            A full-stack application for tracking job applications. Utilizes Supabase for secure data management and integrates Google AI to assist with application summaries and data categorization.
-                        </p>
-                        <div class="mt-auto">
-                            <a href="#" class="inline-flex items-center text-blue-400 light-mode:text-blue-600 hover:text-blue-300 transition font-medium">
-                                View Demo 
-                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="ml-1 w-4 h-4">
-                                    <path d="M7 7h10v10"/><path d="M7 17 17 7"/>
-                                </svg>
-                            </a>
-                        </div>
-                    </div>
-
-                    <div class="card p-6 rounded-xl shadow-2xl flex flex-col">
-                        <h3 class="text-2xl font-semibold mb-2 text-white light-mode:text-slate-900">Vehicle Management API</h3>
-                        <p class="text-sm font-mono text-blue-400 light-mode:text-blue-600 mb-4">C# • .NET • SQL SERVER</p>
-                        <p class="text-slate-300 light-mode:text-slate-700 mb-4 flex-grow">
-                            A robust backend service designed for managing vehicle inventory, maintenance records, and user access. Highlights expertise in C#, .NET Web API development, and SQL database integration.
-                        </p>
-                        <div class="mt-auto">
-                            <a href="#" class="inline-flex items-center text-blue-400 light-mode:text-blue-600 hover:text-blue-300 transition font-medium">
-                                View Code
-                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="ml-1 w-4 h-4">
-                                    <path d="M7 7h10v10"/><path d="M7 17 17 7"/>
-                                </svg>
-                            </a>
-                        </div>
-                    </div>
-                    
-                    <div class="card p-6 rounded-xl shadow-2xl flex flex-col">
-                        <h3 class="text-2xl font-semibold mb-2 text-white light-mode:text-slate-900">Internal Support System</h3>
-                        <p class="text-sm font-mono text-blue-400 light-mode:text-blue-600 mb-4">C# • .NET • SQL • QA</p>
-                        <p class="text-slate-300 light-mode:text-slate-700 mb-4 flex-grow">
-                            Developed a robust ticketing platform to streamline internal IT support workflows. Includes user authentication, incident tracking, and reporting features, ensuring high system uptime and quick resolution times.
-                        </p>
-                        <div class="mt-auto">
-                            <a href="#" class="inline-flex items-center text-blue-400 light-mode:text-blue-600 hover:text-blue-300 transition font-medium">
-                                View Case Study
-                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="ml-1 w-4 h-4">
-                                    <path d="M7 7h10v10"/><path d="M7 17 17 7"/>
-                                </svg>
-                            </a>
-                        </div>
-                    </div>
-
-                    <div class="card p-6 rounded-xl shadow-2xl flex flex-col">
-                        <h3 class="text-2xl font-semibold mb-2 text-white light-mode:text-slate-900">Interactive 3D Data Viz</h3>
-                        <p class="text-sm font-mono text-blue-400 light-mode:text-blue-600 mb-4">REACT • TYPESCRIPT • THREE.JS</p>
-                        <p class="text-slate-300 light-mode:text-slate-700 mb-4 flex-grow">
-                            A web application using **Three.js** to render complex datasets in an interactive 3D environment, allowing users to manipulate perspectives and filter information dynamically.
-                        </p>
-                        <div class="mt-auto">
-                            <a href="#" class="inline-flex items-center text-blue-400 light-mode:text-blue-600 hover:text-blue-300 transition font-medium">
-                                View Live
-                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="ml-1 w-4 h-4">
-                                    <path d="M7 7h10v10"/><path d="M7 17 17 7"/>
-                                </svg>
-                            </a>
-                        </div>
-                    </div>
-
-                    <div class="card p-6 rounded-xl shadow-2xl flex flex-col">
-                        <h3 class="text-2xl font-semibold mb-2 text-white light-mode:text-slate-900">Xamarin Mobile App</h3>
-                        <p class="text-sm font-mono text-blue-400 light-mode:text-blue-600 mb-4">C# • XAMARIN</p>
-                        <p class="text-slate-300 light-mode:text-slate-700 mb-4 flex-grow">
-                            A cross-platform mobile application developed using the C# and Xamarin framework. Demonstrates the ability to create native-feeling apps for both iOS and Android from a single codebase.
-                        </p>
-                        <div class="mt-auto">
-                            <a href="#" class="inline-flex items-center text-blue-400 light-mode:text-blue-600 hover:text-blue-300 transition font-medium">
-                                View Case Study
-                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="ml-1 w-4 h-4">
-                                    <path d="M7 7h10v10"/><path d="M7 17 17 7"/>
-                                </svg>
-                            </a>
-                        </div>
-                    </div>
-
-                    <div class="card p-6 rounded-xl shadow-2xl flex flex-col">
-                        <h3 class="text-2xl font-semibold mb-2 text-white light-mode:text-slate-900">AI Chat Interface</h3>
-                        <p class="text-sm font-mono text-blue-400 light-mode:text-blue-600 mb-4">NEXT.JS • TYPESCRIPT • GENKIT AI</p>
-                        <p class="text-slate-300 light-mode:text-slate-700 mb-4 flex-grow">
-                            A sleek, responsive chat application built to explore the capabilities of large language models, leveraging TypeScript for maintainability and Genkit for advanced AI workflows.
-                        </p>
-                        <div class="mt-auto">
-                            <a href="#" class="inline-flex items-center text-blue-400 light-mode:text-blue-600 hover:text-blue-300 transition font-medium">
-                                View Live
-                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="ml-1 w-4 h-4">
-                                    <path d="M7 7h10v10"/><path d="M7 17 17 7"/>
-                                </svg>
-                            </a>
-                        </div>
-                    </div>
-
-                </div>
-            </div>
-        </section>
-
-        <section id="contact" class="py-16 md:py-24 bg-slate-900 light-mode:bg-slate-50">
-            <div class="max-w-7xl mx-auto container-padding text-center">
-                <h2 class="section-title text-3xl md:text-4xl font-bold mb-16 text-white light-mode:text-slate-900">Contact & Connect</h2>
-                
-                <div class="card p-8 md:p-12 rounded-xl shadow-3xl max-w-2xl mx-auto space-y-8">
-                    <h3 class="text-2xl font-semibold text-white light-mode:text-slate-900">Ready to hire or collaborate?</h3>
-                    <p class="text-lg text-slate-300 light-mode:text-slate-700">
-                        Whether you need an IT professional to maintain system stability or a developer to build the next feature, I'm eager to contribute my skills.
+                <!-- Content -->
+                <div class="text-slate-300 light-mode:text-slate-600 space-y-6">
+                    <p class="text-lg">
+                        I am a dedicated professional with a dual focus on **full-stack web development** and **IT support**, based in Hamilton, New Zealand. My career is driven by a passion for solving complex technical problems and building scalable, user-centric applications.
                     </p>
-                    
-                    <div class="flex flex-col space-y-4 justify-center items-center">
-                        <div class="flex items-center justify-center">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-6 h-6 text-blue-400 mr-3">
-                                <rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/>
-                            </svg>
-                            <a href="mailto:lukeponga9@gmail.com" class="text-lg text-white light-mode:text-slate-900 hover:text-blue-400 transition">lukeponga9@gmail.com</a>
-                        </div>
-        
-                        <div class="flex items-center justify-center">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-6 h-6 text-blue-400 mr-3">
-                                <path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/>
-                            </svg>
-                            <p class="text-lg text-white light-mode:text-slate-900">Hamilton, New Zealand</p>
-                        </div>
+                    <p class="text-lg">
+                        In development, I specialize in the modern web stack, primarily working with **JavaScript, React, Tailwind CSS, and Node.js**. I thrive in environments where I can translate design concepts into flawless, responsive code.
+                    </p>
+                    <p class="text-lg">
+                        My background in IT support gives me a unique advantage: I understand the importance of **system reliability, security, and exceptional user experience** from the ground up. I am constantly learning new technologies to deliver high-quality, maintainable solutions.
+                    </p>
+                    <a href="#contact" class="inline-block mt-4 text-blue-400 light-mode:text-blue-700 font-semibold hover:underline">
+                        Let's build something great →
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills" class="py-16 sm:py-24 bg-slate-900 light-mode:bg-slate-50 container-padding">
+        <div class="max-w-7xl mx-auto">
+            <h2 class="section-title text-4xl font-bold mb-12 text-center text-white light-mode:text-slate-900">Core Skills</h2>
+
+            <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-6">
+                <!-- Skill Card 1: React -->
+                <div class="card p-6 rounded-xl text-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-12 h-12 text-blue-400 mx-auto mb-3">
+                        <path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.34 17.66-1.41 1.41"/><path d="m19.07 4.93-1.41 1.41"/>
+                    </svg>
+                    <p class="text-xl font-semibold">React / Next.js</p>
+                </div>
+                
+                <!-- Skill Card 2: JavaScript -->
+                <div class="card p-6 rounded-xl text-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-12 h-12 text-yellow-400 mx-auto mb-3">
+                        <path d="M2 12s3-4 8-4 8 4 8 4-3 4-8 4-8-4-8-4z"/><circle cx="10" cy="12" r="1"/><circle cx="16" cy="12" r="1"/>
+                    </svg>
+                    <p class="text-xl font-semibold">JavaScript (ES6+)</p>
+                </div>
+
+                <!-- Skill Card 3: Tailwind CSS -->
+                <div class="card p-6 rounded-xl text-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-12 h-12 text-cyan-400 mx-auto mb-3">
+                        <path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/><path d="M14 2v6h6"/>
+                    </svg>
+                    <p class="text-xl font-semibold">Tailwind CSS</p>
+                </div>
+
+                <!-- Skill Card 4: Node.js/Express -->
+                <div class="card p-6 rounded-xl text-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-12 h-12 text-green-400 mx-auto mb-3">
+                        <path d="M12 2v20"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>
+                    </svg>
+                    <p class="text-xl font-semibold">Node.js / Express</p>
+                </div>
+
+                <!-- Skill Card 5: Databases -->
+                <div class="card p-6 rounded-xl text-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-12 h-12 text-red-400 mx-auto mb-3">
+                        <ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M3 5v14a9 3 0 0 0 18 0V5"/>
+                    </svg>
+                    <p class="text-xl font-semibold">SQL / NoSQL</p>
+                </div>
+
+                <!-- Skill Card 6: Networking/Hardware -->
+                <div class="card p-6 rounded-xl text-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-12 h-12 text-orange-400 mx-auto mb-3">
+                        <rect x="2" y="2" width="20" height="8" rx="2" ry="2"/><rect x="2" y="14" width="20" height="8" rx="2" ry="2"/><path d="M6 6h.01"/><path d="M6 18h.01"/>
+                    </svg>
+                    <p class="text-xl font-semibold">Hardware / Network</p>
+                </div>
+
+                <!-- Skill Card 7: Git/DevOps -->
+                <div class="card p-6 rounded-xl text-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-12 h-12 text-purple-400 mx-auto mb-3">
+                        <circle cx="18" cy="18" r="3"/><circle cx="6" cy="6" r="3"/><path d="M13 6h3a2 2 0 0 1 2 2v7"/><path d="M6 18V9"/>
+                    </svg>
+                    <p class="text-xl font-semibold">Git / CI/CD</p>
+                </div>
+
+                <!-- Skill Card 8: Cloud Services -->
+                <div class="card p-6 rounded-xl text-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-12 h-12 text-lime-400 mx-auto mb-3">
+                        <path d="M4 14.5V17a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-2.5"/><path d="M19 19 23 15"/><path d="M1 19 5 15"/><path d="M8 19v-4"/><path d="M16 19v-4"/>
+                    </svg>
+                    <p class="text-xl font-semibold">Cloud (AWS/Azure)</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="py-16 sm:py-24 container-padding">
+        <div class="max-w-7xl mx-auto">
+            <h2 class="section-title text-4xl font-bold mb-12 text-center">Featured Projects</h2>
+            
+            <!-- START: Project Grid Content (Replaced old placeholder content) -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+              
+              <!-- Tile 1: RotorWise AI RX-8 Mechanic -->
+              <div class="card p-6 rounded-xl shadow-xl hover:shadow-2xl transition duration-300 flex flex-col">
+                <h3 class="text-xl font-bold text-white light-mode:text-slate-900 mb-2">RotorWise AI RX-8 Mechanic</h3>
+                <p class="text-slate-400 light-mode:text-slate-600 text-md flex-grow">AI-driven automotive diagnostician that interprets workshop logic and offers actionable repair guidance.</p>
+                <div class="flex flex-wrap gap-2 text-sm mt-3 mb-6 flex-grow-0">
+                  <span class="px-3 py-1 bg-blue-600/20 text-blue-300 light-mode:bg-blue-100 light-mode:text-blue-700 rounded-full font-medium">TypeScript</span>
+                  <span class="px-3 py-1 bg-blue-600/20 text-blue-300 light-mode:bg-blue-100 light-mode:text-blue-700 rounded-full font-medium">LLM (Gemini)</span>
+                  <span class="px-3 py-1 bg-blue-600/20 text-blue-300 light-mode:bg-blue-100 light-mode:text-blue-700 rounded-full font-medium">AI Diagnostics</span>
+                </div>
+                <div class="flex space-x-4 mt-auto pt-4 border-t border-slate-700/50 light-mode:border-slate-200/50">
+                  <a class="px-4 py-2 bg-blue-600 text-white rounded-lg font-semibold hover:bg-blue-700 transition duration-300 text-sm" href="https://github.com/lukeponga-dev/RotorWise-AI-Your-RX-8-AI-Mechanic" target="_blank">View Repo</a>
+                  <a class="px-4 py-2 text-blue-400 border border-blue-400 rounded-lg font-semibold hover:bg-blue-400/10 transition duration-300 text-sm" href="https://github.com/lukeponga-dev/RotorWise-AI-Your-RX-8-AI-Mechanic" target="_blank">Case Study</a>
+                </div>
+              </div>
+
+              <!-- Tile 2: JobTrakr -->
+              <div class="card p-6 rounded-xl shadow-xl hover:shadow-2xl transition duration-300 flex flex-col">
+                <h3 class="text-xl font-bold text-white light-mode:text-slate-900 mb-2">JobTrakr</h3>
+                <p class="text-slate-400 light-mode:text-slate-600 text-md flex-grow">AI-powered job application dashboard with summaries, status tracking, and filterable pipelines for career workflows.</p>
+                <div class="flex flex-wrap gap-2 text-sm mt-3 mb-6 flex-grow-0">
+                  <span class="px-3 py-1 bg-blue-600/20 text-blue-300 light-mode:bg-blue-100 light-mode:text-blue-700 rounded-full font-medium">Next.js</span>
+                  <span class="px-3 py-1 bg-blue-600/20 text-blue-300 light-mode:bg-blue-100 light-mode:text-blue-700 rounded-full font-medium">Supabase</span>
+                  <span class="px-3 py-1 bg-blue-600/20 text-blue-300 light-mode:bg-blue-100 light-mode:text-blue-700 rounded-full font-medium">Google AI</span>
+                </div>
+                <div class="flex space-x-4 mt-auto pt-4 border-t border-slate-700/50 light-mode:border-slate-200/50">
+                  <a class="px-4 py-2 bg-blue-600 text-white rounded-lg font-semibold hover:bg-blue-700 transition duration-300 text-sm" href="https://github.com/lukeponga-dev/jobtracker-dashboard" target="_blank">View Repo</a>
+                  <a class="px-4 py-2 text-blue-400 border border-blue-400 rounded-lg font-semibold hover:bg-blue-400/10 transition duration-300 text-sm" href="https://github.com/lukeponga-dev/jobtracker-dashboard" target="_blank">Live Demo</a>
+                </div>
+              </div>
+
+              <!-- Tile 3: Vehicle Management API -->
+              <div class="card p-6 rounded-xl shadow-xl hover:shadow-2xl transition duration-300 flex flex-col">
+                <h3 class="text-xl font-bold text-white light-mode:text-slate-900 mb-2">Vehicle Management API</h3>
+                <p class="text-slate-400 light-mode:text-slate-600 text-md flex-grow">RESTful backend for vehicle inventory, maintenance logs, and role-based access suitable for fleet management.</p>
+                <div class="flex flex-wrap gap-2 text-sm mt-3 mb-6 flex-grow-0">
+                  <span class="px-3 py-1 bg-blue-600/20 text-blue-300 light-mode:bg-blue-100 light-mode:text-blue-700 rounded-full font-medium">C#</span>
+                  <span class="px-3 py-1 bg-blue-600/20 text-blue-300 light-mode:bg-blue-100 light-mode:text-blue-700 rounded-full font-medium">.NET</span>
+                  <span class="px-3 py-1 bg-blue-600/20 text-blue-300 light-mode:bg-blue-100 light-mode:text-blue-700 rounded-full font-medium">SQL</span>
+                </div>
+                <div class="flex space-x-4 mt-auto pt-4 border-t border-slate-700/50 light-mode:border-slate-200/50">
+                  <a class="px-4 py-2 bg-blue-600 text-white rounded-lg font-semibold hover:bg-blue-700 transition duration-300 text-sm" href="https://github.com/lukeponga-dev/jobtrack" target="_blank">View Repo</a>
+                  <a class="px-4 py-2 text-blue-400 border border-blue-400 rounded-lg font-semibold hover:bg-blue-400/10 transition duration-300 text-sm" href="https://github.com/lukeponga-dev/jobtrack" target="_blank">API Docs</a>
+                </div>
+              </div>
+
+              <!-- Tile 4: AI Chat Interface SDK -->
+              <div class="card p-6 rounded-xl shadow-xl hover:shadow-2xl transition duration-300 flex flex-col">
+                <h3 class="text-xl font-bold text-white light-mode:text-slate-900 mb-2">AI Chat Interface SDK</h3>
+                <p class="text-slate-400 light-mode:text-slate-600 text-md flex-grow">Reusable, responsive chat UI and SDK for integrating LLMs into web apps with composable components.</p>
+                <div class="flex flex-wrap gap-2 text-sm mt-3 mb-6 flex-grow-0">
+                  <span class="px-3 py-1 bg-blue-600/20 text-blue-300 light-mode:bg-blue-100 light-mode:text-blue-700 rounded-full font-medium">TypeScript</span>
+                  <span class="px-3 py-1 bg-blue-600/20 text-blue-300 light-mode:bg-blue-100 light-mode:text-blue-700 rounded-full font-medium">Genkit</span>
+                  <span class="px-3 py-1 bg-blue-600/20 text-blue-300 light-mode:bg-blue-100 light-mode:text-blue-700 rounded-full font-medium">UI SDK</span>
+                </div>
+                <div class="flex space-x-4 mt-auto pt-4 border-t border-slate-700/50 light-mode:border-slate-200/50">
+                  <a class="px-4 py-2 bg-blue-600 text-white rounded-lg font-semibold hover:bg-blue-700 transition duration-300 text-sm" href="https://github.com/lukeponga-dev/OpenAI-Chat-interface-sdk" target="_blank">View Repo</a>
+                  <a class="px-4 py-2 text-blue-400 border border-blue-400 rounded-lg font-semibold hover:bg-blue-400/10 transition duration-300 text-sm" href="https://github.com/lukeponga-dev/OpenAI-Chat-interface-sdk" target="_blank">Docs</a>
+                </div>
+              </div>
+
+              <!-- Tile 5: NASA APOD Viewer -->
+              <div class="card p-6 rounded-xl shadow-xl hover:shadow-2xl transition duration-300 flex flex-col">
+                <h3 class="text-xl font-bold text-white light-mode:text-slate-900 mb-2">NASA APOD Viewer</h3>
+                <p class="text-slate-400 light-mode:text-slate-600 text-md flex-grow">Astronomy Picture of the Day viewer that fetches and displays NASA’s APOD with captions and metadata.</p>
+                <div class="flex flex-wrap gap-2 text-sm mt-3 mb-6 flex-grow-0">
+                  <span class="px-3 py-1 bg-blue-600/20 text-blue-300 light-mode:bg-blue-100 light-mode:text-blue-700 rounded-full font-medium">TypeScript</span>
+                  <span class="px-3 py-1 bg-blue-600/20 text-blue-300 light-mode:bg-blue-100 light-mode:text-blue-700 rounded-full font-medium">API</span>
+                  <span class="px-3 py-1 bg-blue-600/20 text-blue-300 light-mode:bg-blue-100 light-mode:text-blue-700 rounded-full font-medium">Visualization</span>
+                </div>
+                <div class="flex space-x-4 mt-auto pt-4 border-t border-slate-700/50 light-mode:border-slate-200/50">
+                  <a class="px-4 py-2 bg-blue-600 text-white rounded-lg font-semibold hover:bg-blue-700 transition duration-300 text-sm" href="https://github.com/lukeponga-dev/web-app-using-NASAS-Astronomy-Picture-of-the-day-API" target="_blank">View Repo</a>
+                  <a class="px-4 py-2 text-blue-400 border border-blue-400 rounded-lg font-semibold hover:bg-blue-400/10 transition duration-300 text-sm" href="https://github.com/lukeponga-dev/web-app-using-NASAS-Astronomy-Picture-of-the-day-API" target="_blank">Demo</a>
+                </div>
+              </div>
+
+              <!-- Tile 6: Professional Portfolio -->
+              <div class="card p-6 rounded-xl shadow-xl hover:shadow-2xl transition duration-300 flex flex-col">
+                <h3 class="text-xl font-bold text-white light-mode:text-slate-900 mb-2">Professional Portfolio</h3>
+                <p class="text-slate-400 light-mode:text-slate-600 text-md flex-grow">Canonical personal site that consolidates projects, case studies, and contact information for recruiters and collaborators.</p>
+                <div class="flex flex-wrap gap-2 text-sm mt-3 mb-6 flex-grow-0">
+                  <span class="px-3 py-1 bg-blue-600/20 text-blue-300 light-mode:bg-blue-100 light-mode:text-blue-700 rounded-full font-medium">HTML</span>
+                  <span class="px-3 py-1 bg-blue-600/20 text-blue-300 light-mode:bg-blue-100 light-mode:text-blue-700 rounded-full font-medium">CSS</span>
+                  <span class="px-3 py-1 bg-blue-600/20 text-blue-300 light-mode:bg-blue-100 light-mode:text-blue-700 rounded-full font-medium">Portfolio</span>
+                </div>
+                <div class="flex space-x-4 mt-auto pt-4 border-t border-slate-700/50 light-mode:border-slate-200/50">
+                  <a class="px-4 py-2 bg-blue-600 text-white rounded-lg font-semibold hover:bg-blue-700 transition duration-300 text-sm" href="https://github.com/lukeponga-dev/professional-portfolio" target="_blank">View Repo</a>
+                  <a class="px-4 py-2 text-blue-400 border border-blue-400 rounded-lg font-semibold hover:bg-blue-400/10 transition duration-300 text-sm" href="https://github.com/lukeponga-dev/lukeponga-dev.github.io" target="_blank">Live Site</a>
+                </div>
+              </div>
+            </div>
+            <!-- END: Project Grid Content -->
+
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-16 sm:py-24 bg-slate-900 light-mode:bg-slate-50 container-padding">
+        <div class="max-w-7xl mx-auto text-center">
+            <h2 class="section-title text-4xl font-bold mb-8 text-white light-mode:text-slate-900">Get In Touch</h2>
+            <p class="text-xl text-slate-300 light-mode:text-slate-600 max-w-3xl mx-auto mb-12">
+                I am actively seeking new opportunities in development or IT support. Feel free to reach out for collaboration or just to say hello!
+            </p>
+            
+            <div class="card p-8 sm:p-12 max-w-2xl mx-auto rounded-xl">
+                <h3 class="text-2xl font-bold mb-6 text-white light-mode:text-slate-900">Contact Details</h3>
+                <div class="space-y-6">
+                    <!-- Email -->
+                    <div class="flex items-center justify-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-6 h-6 text-blue-400 mr-3">
+                            <rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/>
+                        </svg>
+                        <a href="mailto:lukeponga9@gmail.com" class="text-lg text-white light-mode:text-slate-900 hover:text-blue-400 transition">lukeponga9@gmail.com</a>
+                    </div>
+    
+                    <!-- Location -->
+                    <div class="flex items-center justify-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-6 h-6 text-blue-400 mr-3">
+                            <path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/>
+                        </svg>
+                        <p class="text-lg text-white light-mode:text-slate-900">Hamilton, New Zealand</p>
                     </div>
                 </div>
             </div>
         </section>
     </main>
 
-    <footer class="bg-slate-950 py-8 border-t border-slate-800 light-mode:bg-white light-mode:border-slate-200">
-        <div class="max-w-7xl mx-auto container-padding text-center">
-            <p class="text-sm text-slate-500 light-mode:text-slate-500">&copy; 2025 Luke Ponga. All rights reserved.</p>
-        </div>
+    <!-- Footer -->
+    <footer class="bg-slate-950 py-8 border-t border-slate-700 light-mode:bg-slate-900 light-mode:border-slate-800 text-center text-slate-400 light-mode:text-slate-500">
+        <p class="text-sm">&copy; 2025 Luke Ponga. All rights reserved. | Built with Tailwind CSS.</p>
     </footer>
 
+    <!-- Link to JavaScript file -->
     <script src="js/script.js"></script>
 </body>
 </html>
+
