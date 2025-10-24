@@ -5,6 +5,15 @@ const moonIcon = document.getElementById('moonIcon');
 const sunIcon = document.getElementById('sunIcon');
 const body = document.body;
 
+/**
+ * Gets the current value of a CSS variable from the body element.
+ * @param {string} variableName - The name of the CSS variable (e.g., '--particle-color').
+ * @returns {string} The computed value of the variable.
+ */
+function getCssVariable(variableName) {
+    return getComputedStyle(body).getPropertyValue(variableName).trim();
+}
+
 // 1. Initial Theme Setup: Check localStorage for user preference
 const currentTheme = localStorage.getItem('theme') || 'dark';
 if (currentTheme === 'light') {
@@ -43,7 +52,7 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         const targetElement = document.querySelector(targetId);
 
         if (targetElement) {
-            // Compensate for the sticky navigation bar height
+            // Compensate for the sticky navigation bar height (80px is a good estimate)
             const headerOffset = 80; 
             const elementPosition = targetElement.offsetTop;
             const offsetPosition = elementPosition - headerOffset;
@@ -119,29 +128,33 @@ if (canvas) {
             ctx.beginPath();
             ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2); 
             // Read particle color dynamically from CSS
-            const particleColor = getComputedStyle(body).getPropertyValue('--particle-color').trim();
+            const particleColor = getCssVariable('--particle-color');
             ctx.fillStyle = particleColor || 'rgba(59, 130, 246, 0.5)';
             ctx.fill();
         }
     }
 
-    // Function to connect particles with lines
+    // Function to connect particles with lines (the "network" effect)
     function connectParticles() {
-        const particleColor = getComputedStyle(body).getPropertyValue('--particle-color').trim();
+        // Get the color dynamically to ensure theme change is reflected
+        const particleColor = getCssVariable('--particle-color');
 
         for (let i = 0; i < particleCount; i++) {
             for (let j = i + 1; j < particleCount; j++) {
                 const p1 = particles[i];
                 const p2 = particles[j];
 
-                // Calculate distance using Pythagorean theorem (faster than Math.sqrt for comparison)
+                // Calculate distance squared (faster than Math.sqrt for comparison)
                 const distanceSq = (p1.x - p2.x) ** 2 + (p1.y - p2.y) ** 2;
 
                 if (distanceSq < connectDistance ** 2) {
+                    // Calculate opacity based on distance: closer = more opaque
                     const opacity = 1 - (distanceSq / (connectDistance ** 2));
                     
                     ctx.beginPath();
                     // Set line color dynamically, fading out based on distance
+                    // We reduce the maximum opacity of the line slightly (e.g., * 0.4) 
+                    // to keep the lines subtle and the points the focus.
                     ctx.strokeStyle = particleColor.replace(/,\s*([\d.]+)\)/, `, ${opacity * 0.4})`);
                     ctx.lineWidth = 0.5; // Subtle line thickness
                     ctx.moveTo(p1.x, p1.y);
@@ -161,7 +174,9 @@ if (canvas) {
     function animate() {
         ctx.clearRect(0, 0, canvas.width, canvas.height); // Always clear the canvas first
 
-        // Only draw particles/lines when in dark mode (where the effect is intended)
+        // Only draw particles/lines when in dark mode (where the effect is intended for contrast)
+        // Note: The particle color variable is set to a low opacity in light mode, so this check 
+        // prevents drawing a near-invisible effect and saves CPU cycles.
         if (!body.classList.contains('light-mode')) {
             connectParticles();
             particles.forEach(particle => {
@@ -178,3 +193,4 @@ if (canvas) {
         animate();
     }
 }
+
